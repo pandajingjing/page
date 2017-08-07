@@ -1,0 +1,48 @@
+<?php
+/**
+ * 首页
+ */
+tLoadTpl('global_topnav', array(
+    'aCSSURLs' => array(
+        '/bodybuild/index.css'
+    ),
+    'sPageTitle' => '首页',
+    'sNavActiveKey' => 'home',
+    'aTopURLs' => $aTopURLs
+));
+?>
+<p>
+	重新开始了,
+	<mark>坚持</mark>
+</p>
+<p>你们最关心啥,当然是最关心体重数据变化了,所以首页就放体重数据了.</p>
+<div class="selector-right">
+	<div class="btn-group">
+		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+			aria-expanded="false" id="selector_now">loading...</button>
+		<ul class="dropdown-menu" id="selector_menu">
+			<li>
+				<a data="14" class="a-pointer">近两周</a>
+			</li>
+			<li>
+				<a data="30" class="a-pointer">近30天</a>
+			</li>
+			<li>
+				<a data="60" class="a-pointer">近60天</a>
+			</li>
+			<li>
+				<a data="90" class="a-pointer">近90天</a>
+			</li>
+		</ul>
+	</div>
+</div>
+<div id="weightchart" class="weightchart">loading...</div>
+<input type="hidden" id="dataurl" value="<?php tEcho('./ajaxdata.php?t=weight') ?>" />
+<?php
+tLoadTpl('global_bottom', array(
+    'aJSURLs' => array(
+        '/lib/highcharts/4.1.6/highcharts.js',
+        '/bodybuild/index.js'
+    )
+));
+?>

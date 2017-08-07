@@ -1,0 +1,20 @@
+</div>
+<div class="col-md-3">
+	<div id="baiducontainer">loading...</div>
+</div>
+</div>
+<div class="page-footer">
+	沪ICP备15010464号 本站部分内容来自"
+	<a data-container="body" data-placement="top" tabindex="0" role="button" data-trigger="focus" data-toggle="popover"
+		title="版权说明" data-content="本博客健身及饮食类文章均来自互联网,版权归对应网站或个人所有.部分转载只为说明相关观点.如有侵权请告之.">硬派健身</a>
+	"
+</div>
+<img id="qrcode" class="qrcode-small" src="<?php tEcho(getRes('/bodybuild/img/qrcode.png')); ?>" />
+</div>
+<?php
+tLoadTpl('frame_foot', array(
+    'aJSURLs' => array_merge(array(
+        '/bodybuild/global.js'
+    ), $aJSURLs)
+));
+?>
