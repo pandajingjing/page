@@ -1,0 +1,148 @@
+<style type="text/css">
+.debuggercontent {
+	padding: 0px 15px;
+	border-radius: 6px;
+	border: 1px solid #e7e7e7;
+	margin-top: 70px;
+}
+
+.paramtable{
+	margin-bottom:0px;
+}
+</style>
+<div class="container debuggercontent">
+	<div class="page-header">
+		<h3>系统开销</h3>
+	</div>
+	<table class="table table-striped table-bordered table-hover">
+		<thead>
+			<tr>
+    			<th>模块</th>
+    			<th>耗时</th>
+    			<th>内存开销(byte)</th>
+			</tr>
+		</thead>
+		<tbody>
+        	<?php foreach($aDebugInfo as $sDebugType =>$aDebugInfo){ ?>
+        	<tr>
+    			<td><?php panda($sDebugType); ?></td>
+    			<td><?php panda(number_format(($aDebugInfo['fEndTime'] - $aDebugInfo['fStartTime'])*1000,5)); ?></td>
+    			<td><?php panda(number_format($aDebugInfo['iEndMemory'] - $aDebugInfo['iStartMemory'])); ?></td>
+    		</tr>
+        	<?php } ?>
+    	</tbody>
+  	</table>
+	<div class="page-header">
+		<h3>系统信息</h3>
+	</div>
+	<table class="table table-striped table-bordered table-hover">
+		<thead>
+			<tr>
+    			<th>#</th>
+    			<th>内容</th>
+			</tr>
+		</thead>
+		<tbody>
+        	<?php $iIndex=0;foreach($aMessages as $aDebugMsg){ ?>
+        	<tr>
+    			<td><?php panda(++$iIndex); ?></td>
+    			<td><?php $aDebugMsg['bIsHTML']?pandaHtml($aDebugMsg['sMsg']):panda($aDebugMsg['sMsg']); ?></td>
+    		</tr>
+        	<?php } ?>
+    	</tbody>
+  	</table>
+	<div class="page-header">
+		<h3>系统参数</h3>
+	</div>
+	<table class="table table-striped table-bordered table-hover">
+		<tbody>
+    		<tr>
+    			<td>POST</td>
+    			<td>
+    				<table class="table table-striped table-bordered table-hover table-condensed paramtable">
+                      	<?php foreach($aAllParam['aPost'] as $sKey => $mValue ){ ?>
+                      	<tr>
+    						<td><?php panda($sKey); ?></td>
+    						<td><?php debug($mValue); ?></td>
+    					</tr>
+                      	<?php } ?>
+                    </table>
+    			</td>
+    		</tr>
+    		<tr>
+    			<td>GET</td>
+    			<td>
+    				<table class="table table-striped table-bordered table-hover table-condensed paramtable">
+                        <?php foreach($aAllParam['aGet'] as $sKey => $mValue ){ ?>
+                        <tr>
+                            <td><?php panda($sKey); ?></td>
+    						<td><?php debug($mValue); ?></td>
+                        </tr>
+                        <?php } ?>
+            		</table>
+    			</td>
+    		</tr>
+    		<tr>
+    			<td>Router</td>
+    			<td>
+                    <table class="table table-striped table-bordered table-hover table-condensed paramtable">
+                        <?php foreach($aAllParam['aRouter'] as $sKey => $mValue ){ ?>
+                        <tr>
+                            <td><?php panda($sKey); ?></td>
+    						<td><?php debug($mValue); ?></td>
+                        </tr>
+                        <?php } ?>
+                    </table>
+    			</td>
+    		</tr>
+    		<tr>
+    			<td>COOKIE</td>
+    			<td>
+                    <table class="table table-striped table-bordered table-hover table-condensed paramtable">
+                        <?php foreach($aAllParam['aCookie'] as $sKey => $mValue ){ ?>
+                        <tr>
+                            <td><?php panda($sKey); ?></td>
+    						<td><?php debug($mValue); ?></td>
+                        </tr>
+                        <?php } ?>
+                    </table>
+    			</td>
+    		</tr>
+    		<tr>
+    			<td>SERVER</td>
+    			<td>
+                    <table class="table table-striped table-bordered table-hover table-condensed paramtable">
+                        <?php foreach($aAllParam['aServer'] as $sKey => $mValue ){ ?>
+                        <tr>
+                            <td><?php panda($sKey); ?></td>
+    						<td><?php debug($mValue); ?></td>
+                        </tr>
+                        <?php } ?>
+                    </table>
+    			</td>
+    		</tr>
+    		<tr>
+    			<td>CONFIG</td>
+    			<td>
+                    <table class="table table-striped table-bordered table-hover table-condensed paramtable">
+                        <?php foreach($aAllParam['aConfig'] as $sKey => $mValue ){ ?>
+                        <tr>
+                            <td><?php panda($sKey); ?></td>
+                            <td>
+                                <table class="table table-striped table-bordered table-hover table-condensed paramtable">
+                                    <?php foreach($mValue as $sSubKey => $mSubValue){ ?>
+                                    <tr>
+                                        <td><?php panda($sSubKey); ?></td>
+                                        <td><?php debug($mSubValue); ?></td>
+                                    </tr>
+                                    <?php } ?>
+                                </table>
+                            </td>
+                        </tr>
+                        <?php } ?>
+                    </table>
+    			</td>
+    		</tr>
+		</tbody>
+	</table>
+</div>

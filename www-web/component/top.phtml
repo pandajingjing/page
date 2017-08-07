@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="<?php panda(pandaRes('/lib/img/favicon_panda_32px.ico')); ?>">
+<title><?php panda($sPageTitle); ?></title>
+<link href="<?php panda(pandaRes('/lib/css/bootstrap-3.3.0.min.css')); ?>" rel="stylesheet">
+<link href="<?php panda(pandaRes('/www-web/css/global.css')); ?>" rel="stylesheet">
+<?php foreach($aCssFiles as $sFile){ ?>
+<link href="<?php panda(pandaRes($sFile)); ?>" rel="stylesheet">
+<?php } ?>
+</head>
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="<?php panda($aTopURLs['sDefault']); ?>">黑白配</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li <?php if('default'==$sShowTap){ ?> class="active" <?php } ?>>
+						<a href="<?php panda($aTopURLs['sDefault']); ?>">首页</a>
+					</li>
+					<li <?php if('sudoku'==$sShowTap){ ?> class="active" <?php } ?>>
+						<a href="<?php panda($aTopURLs['sSudoku']); ?>">数独工具</a>
+					</li>
+					<li <?php if('item'==$sShowTap){ ?> class="active" <?php } ?>>
+						<a href="<?php panda($aTopURLs['sItem']); ?>">物品管理</a>
+					</li>
+					<li <?php if('note'==$sShowTap){ ?> class="active" <?php } ?>>
+						<a href="<?php panda($aTopURLs['sNote']); ?>">记事本</a>
+					</li>
+					<li <?php if('file'==$sShowTap){ ?> class="active" <?php } ?>>
+						<a href="<?php panda($aTopURLs['sFile']); ?>">文件管理</a>
+					</li>
+					<li class="dropdown<?php if('2016dbz'==$sShowTap){ ?> active<?php } ?>">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							2016大暴走系列
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu" role="menu">
+							<li class="dropdown-header">上海前往重庆</li>
+							<li>
+								<a href="<?php panda($aTopURLs['aQZoneTopList']['2016dbz_01']); ?>">行程准备</a>
+							</li>
+							<li>
+								<a href="<?php panda($aTopURLs['aQZoneTopList']['2016dbz_02']); ?>">上海至重庆</a>
+							</li>
+							<li class="divider"></li>
+							<li class="dropdown-header">成都及川西地区</li>
+							<li>
+								<a href="<?php panda($aTopURLs['aQZoneTopList']['2016dbz_03']); ?>">重庆至成都,西岭雪山及都江堰</a>
+							</li>
+							<li>
+								<a href="<?php panda($aTopURLs['aQZoneTopList']['2016dbz_04']); ?>">黄龙及九寨沟(一)</a>
+							</li>
+							<li>
+								<a href="<?php panda($aTopURLs['aQZoneTopList']['2016dbz_05']); ?>">九寨沟(二)</a>
+							</li>
+							<li>
+								<a href="<?php panda($aTopURLs['aQZoneTopList']['2016dbz_06']); ?>">川西大草原</a>
+							</li>
+							<li class="divider"></li>
+							<li class="dropdown-header">重庆</li>
+							<li>
+								<a href="<?php panda($aTopURLs['aQZoneTopList']['2016dbz_07']); ?>">重庆及周边</a>
+							</li>
+							<li>
+								<a href="<?php panda($aTopURLs['aQZoneTopList']['2016dbz_08']); ?>">外篇:重走上学路</a>
+							</li>
+							<li class="divider"></li>
+							<li class="dropdown-header">重庆前往上海</li>
+							<li>
+								<a href="<?php panda($aTopURLs['aQZoneTopList']['2016dbz_09']); ?>">重庆至凤凰古城</a>
+							</li>
+							<li>
+								<a href="<?php panda($aTopURLs['aQZoneTopList']['2016dbz_10']); ?>">长沙至上海</a>
+							</li>
+							<li class="divider"></li>
+							<li class="dropdown-header">邮轮行</li>
+							<li>
+								<a href="<?php panda($aTopURLs['aQZoneTopList']['2016dbz_11']); ?>">海洋量子号(一)</a>
+							</li>
+							<li>
+								<a href="<?php panda($aTopURLs['aQZoneTopList']['2016dbz_12']); ?>">海洋量子号(二)</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="<?php panda($aTopURLs['aQZoneTopList']['2016dbz_13']); ?>">旅程总结</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="<?php panda($aTopURLs['aQZoneTopList']['sOther']); ?>">其他日志</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="active">
+						<a href="#" id="backtotop">返回顶部</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container pagecontent">

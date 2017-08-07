@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="<?php panda(pandaRes('/lib/img/favicon_panda_32px.ico')); ?>">
+<title>H5简单页面</title>
+<link href="<?php panda(pandaRes('/lib/css/bootstrap/3.3.0.min.css')); ?>" rel="stylesheet">
+<style type="text/css">
+body {
+	padding-top: 70px;
+}
+
+.foot {
+	border-top: 2px solid #eee;
+	margin: 20px 0 20px;
+	padding-top: 9px;
+	text-align: center;
+}
+
+.bodycontainer {
+	padding: 0px 30px;
+	border-radius: 6px;
+	border: 1px solid #eee;
+	line-height: 50px;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">网站名</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="active">
+						<a href="#">首页</a>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="active">
+						<a href="#">返回顶部</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="bodycontainer">这是一个简单的首页</div>
+	</div>
+	<div class="foot">网站备案编号</div>
+	<script src="<?php panda(pandaRes('/lib/js/jquery/3.1.0.min.js')); ?>"></script>
+	<script src="<?php panda(pandaRes('/lib/js/bootstrap/3.3.0.min.js')); ?>"></script>
+</body>
+</html>

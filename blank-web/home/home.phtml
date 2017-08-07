@@ -1,0 +1,43 @@
+<?php
+$this->pandaTpl('component_top', array(
+    'sPageTitle' => '说明文档-文档',
+    'aCssFiles' => [
+        '/lib/css/syntaxhighlighter/shCore.css',
+        '/lib/css/syntaxhighlighter/shThemeDefault.css'
+    ],
+    'sShowTap' => 'default'
+));
+?>
+<div class="page-header">
+	<h1>文档目录</h1>
+</div>
+<ol>
+	<li>
+		<a href="/doc/#_doc_1" target="_doc_1">服务器及系统环境的相关配置.</a>
+	</li>
+	<li>
+		<a href="/doc/#_doc_2" target="_doc_2">应用环境的安装.</a>
+	</li>
+	<li>
+		<a href="/doc/#_doc_3" target="_doc_3">环境各目录说明.</a>
+	</li>
+	<li>
+		<a href="/doc/#_doc_4" target="_doc_4">获取,新增和编辑引导系统.</a>
+	</li>
+	<li>
+		<a href="/doc/#_doc_5" target="_doc_5">新增子域名开发步骤.</a>
+	</li>
+	<li>
+		<a href="/doc/#_doc_6" target="_doc_6">关于IDE配置,个人使用ZendStudio.</a>
+	</li>
+	<li>
+		<a href="/doc/#_doc_7" target="_doc_7">框架路由和自动加载的规则.</a>
+	</li>
+	<li>
+		<a href="/doc/#_doc_8" target="_doc_8">新增业务开发步骤.</a>
+	</li>
+</ol>
+<?php
+$this->pandaTpl('component_bottom', array(
+    'aJSFiles' => []
+));
