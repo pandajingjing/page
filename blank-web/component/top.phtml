@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="icon" href="<?php panda(pandaRes('/lib/img/favicon_panda_32px.ico')); ?>">
+<link rel="icon" href="<?php panda(pandaRes('/lib/img/favicon_panda_head_96px.png')); ?>">
 <title><?php panda($sPageTitle); ?></title>
 <link href="<?php panda(pandaRes('/lib/css/bootstrap/3.3.0.min.css')); ?>" rel="stylesheet">
 <link href="<?php panda(pandaRes('/blank-web/css/global.css')); ?>" rel="stylesheet">
@@ -14,55 +14,55 @@
 <?php } ?>
 </head>
 <body>
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="<?php panda($aTopURLs['sDefault']); ?>">说明文档</a>
-			</div>
-			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li <?php if('default'==$sShowTap){ ?> class="active" <?php } ?>>
-						<a href="<?php panda($aTopURLs['sDefault']); ?>">首页</a>
-					</li>
-					<li class="dropdown<?php if('doc'==$sShowTap){ ?> active<?php } ?>">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							文档
-							<span class="caret"></span>
-						</a>
-						<ul class="dropdown-menu" role="menu">
-							<li>
-								<a href="/doc/#_doc_1" target="_doc_1">服务器及系统环境的相关配置.</a>
-							</li>
-							<li>
-								<a href="/doc/#_doc_2" target="_doc_2">应用环境的安装.</a>
-							</li>
-							<li>
-								<a href="/doc/#_doc_3" target="_doc_3">环境各目录说明.</a>
-							</li>
-							<li>
-								<a href="/doc/#_doc_4" target="_doc_4">获取,新增和编辑引导系统.</a>
-							</li>
-							<li>
-								<a href="/doc/#_doc_5" target="_doc_5">新增子域名开发步骤.</a>
-							</li>
-							<li>
-								<a href="/doc/#_doc_6" target="_doc_6">关于IDE配置,个人使用ZendStudio.</a>
-							</li>
-							<li>
-								<a href="/doc/#_doc_7" target="_doc_7">框架路由和自动加载的规则.</a>
-							</li>
-							<li>
-								<a href="/doc/#_doc_8" target="_doc_8">新增业务开发步骤.</a>
-							</li>
-						</ul>
-					</li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li class="active">
-						<a href="#" class="backtotop">返回顶部</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<div class="container pagecontent">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="<?php panda($aTopURLs['sDefault']); ?>">说明文档</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li <?php if('default'==$sShowTap){ ?> class="active" <?php } ?>>
+                        <a href="<?php panda($aTopURLs['sDefault']); ?>">首页</a>
+                    </li>
+                    <li class="dropdown<?php if('doc'==$sShowTap){ ?> active<?php } ?>">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            文档
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="<?php panda($aTopURLs['aDocList'][0]); ?>" target="_doc_1">服务器及系统环境的相关配置.</a>
+                            </li>
+                            <li>
+                                <a href="<?php panda($aTopURLs['aDocList'][1]); ?>" target="_doc_2">应用环境的安装.</a>
+                            </li>
+                            <li>
+                                <a href="<?php panda($aTopURLs['aDocList'][2]); ?>" target="_doc_3">环境各目录说明.</a>
+                            </li>
+                            <li>
+                                <a href="<?php panda($aTopURLs['aDocList'][3]); ?>" target="_doc_4">获取,新增和编辑引导系统.</a>
+                            </li>
+                            <li>
+                                <a href="<?php panda($aTopURLs['aDocList'][4]); ?>" target="_doc_5">新增子域名开发步骤.</a>
+                            </li>
+                            <li>
+                                <a href="<?php panda($aTopURLs['aDocList'][5]); ?>" target="_doc_6">关于IDE配置,个人使用ZendStudio.</a>
+                            </li>
+                            <li>
+                                <a href="<?php panda($aTopURLs['aDocList'][6]); ?>" target="_doc_7">框架路由和自动加载的规则.</a>
+                            </li>
+                            <li>
+                                <a href="<?php panda($aTopURLs['aDocList'][7]); ?>" target="_doc_8">新增业务开发步骤.</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active">
+                        <a href="#" class="backtotop">返回顶部</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container pagecontent">
