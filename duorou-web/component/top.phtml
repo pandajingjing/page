@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="<?php panda(pandaRes('/lib/img/favicon_panda_head_96px.png')); ?>">
+<title><?php panda($sPageTitle); ?></title>
+<link href="<?php panda(pandaRes('/lib/css/bootstrap/3.3.0.min.css')); ?>" rel="stylesheet">
+<link href="<?php panda(pandaRes('/duorou-web/css/global.css')); ?>" rel="stylesheet">
+<?php foreach($aCssFiles as $sFile){ ?>
+<link href="<?php panda(pandaRes($sFile)); ?>" rel="stylesheet">
+<?php } ?>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="<?php panda($aTopURLs['sDefault']); ?>">匠心多肉</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li <?php if('default'==$sShowTap){ ?> class="active" <?php } ?>>
+                        <a href="<?php panda($aTopURLs['sDefault']); ?>">首页</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active">
+                        <a href="#" class="backtotop">返回顶部</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container pagecontent">
