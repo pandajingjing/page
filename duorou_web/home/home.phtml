@@ -1,0 +1,28 @@
+<?php
+$this->pandaTpl('component_top', array(
+    'sPageTitle' => '匠心多肉-首页',
+    'aCssFiles' => [
+        '/duorou_web/css/home.css'
+    ],
+    'sShowTap' => 'default'
+));
+?>
+<div class="grid">
+<?php
+foreach ($aImgs as $sImg) {
+    ?>
+<div class="grid-item">
+        <img class="img-rounded img-thumbnail" src="<?php echo $sImg; ?>" />
+    </div>
+<?php
+}
+?>
+</div>
+<?php
+$this->pandaTpl('component_bottom', array(
+    'aJSFiles' => [
+        '/lib/js/masonry/4.2.0.pkgd.min.js',
+        '/lib/js/infinitescroll/3.0.2.pkgd.min.js',
+        '/duorou_web/js/home.js'
+    ]
+));

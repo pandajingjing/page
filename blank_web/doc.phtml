@@ -1,0 +1,768 @@
+<?php
+$this->pandaTpl('component_top', array(
+    'sPageTitle' => '说明文档-文档',
+    'aCssFiles' => [
+        '/lib/css/syntaxhighlighter/3.0.83/shCore.css',
+        '/lib/css/syntaxhighlighter/3.0.83/shThemeDefault.css'
+    ],
+    'sShowTap' => 'doc'
+));
+?>
+<div class="page-header">
+    <h1>文档内容</h1>
+</div>
+<ol>
+    <li>
+        <a href="#" class="anchor" data-anchor-target="doc_1">服务器及系统环境的相关配置.</a>
+    </li>
+    <li>
+        <a href="#" class="anchor" data-anchor-target="doc_2">应用环境的安装.</a>
+    </li>
+    <li>
+        <a href="#" class="anchor" data-anchor-target="doc_3">环境各目录说明.</a>
+    </li>
+    <li>
+        <a href="#" class="anchor" data-anchor-target="doc_4">获取,新增和编辑引导系统.</a>
+    </li>
+    <li>
+        <a href="#" class="anchor" data-anchor-target="doc_5">新增子域名开发步骤.</a>
+    </li>
+    <li>
+        <a href="#" class="anchor" data-anchor-target="doc_6">关于IDE配置,个人使用ZendStudio.</a>
+    </li>
+    <li>
+        <a href="#" class="anchor" data-anchor-target="doc_7">框架路由和自动加载的规则.</a>
+    </li>
+    <li>
+        <a href="#" class="anchor" data-anchor-target="doc_8">新增业务开发步骤.</a>
+    </li>
+</ol>
+<ol>
+    <li id="doc_1">
+        服务器及系统环境的相关配置.
+        <ol>
+            <li>一台跑有centos 6.5或6.6的64位的服务器.</li>
+            <li>确保网络通常及命令行环境正常,并拥有root账号.</li>
+            <li>
+                使用root账号通过命令行登陆机器并获取环境安装配置的脚本.
+                <pre class="brush: shell;toolbar: false;">
+                	yum install git -y
+                	git clone https://github.com/pandajingjing/panda-envshell.git
+                </pre>
+            </li>
+            <li>
+                添加相关用户,例如:运维相关用户,开发及测试相关用户等.不用添加环境相关用户.
+                <pre class="brush: shell;toolbar: false;">
+                	groupadd somegroup
+                	useradd -g somegroup somebody
+                </pre>
+            </li>
+            <li>
+                安装环境维护需要的相关包,升级系统现有的包.
+                <pre class="brush: shell;toolbar: false;">
+                	./panda-envshell/tools/init_common_lib.sh
+                </pre>
+            </li>
+            <li>
+                编辑环境全局配置,包括:环境使用的用户名和用户组,相关目录位置等.如果不是十分了解相关配置的含义,建议保留默认配置.
+                <pre class="brush: shell;toolbar: false;">
+                	vi ./panda-envshell/config
+                </pre>
+                核心配置内容如下:
+                <pre class="brush: shell;toolbar: false;">
+                	ENV_USER='app'								#运行环境的用户名
+                    ENV_GROUP='app'								#运行环境的用户组
+                    INSTALL_DIR_DATA='/data'					#运行环境的根目录
+                    INSTALL_DIR_BIN=$INSTALL_DIR_DATA'/bin'		#环境所需应用的安装根目录
+                    INSTALL_DIR_LOG=$INSTALL_DIR_DATA'/log'		#各类应用的日志根目录
+                    INSTALL_DIR_APP=$INSTALL_DIR_DATA'/app'		#web应用的代码目录
+                </pre>
+            </li>
+            <li>
+                添加环境使用的用户名和用户组.
+                <pre class="brush: shell;toolbar: false;">
+                	./panda-envshell/tools/init_user_group.sh
+                </pre>
+            </li>
+            <li>
+                配置bash历史记录的格式和存放位置,此步可以略过.
+                <pre class="brush: shell;toolbar: false;">
+                	./panda-envshell/configure.sh -n bash
+                </pre>
+            </li>
+            <li>
+                为相应用户添加ssh-key,配置ssh端口.注意:此步骤后,root将无法从远程登录,其他用户也无法使用密码登录,必须使用ssh-key登录.
+                <pre class="brush: shell;toolbar: false;">
+    				su - somebody
+                    ssh-keygen
+                    vi .ssh/authorized_keys
+                    ctrl+d
+                    vi ./panda-envshell/assemble/sshd/2.0/config
+                    ./panda-envshell/configure.sh -n sshd
+                    service sshd restart
+                </pre>
+            </li>
+        </ol>
+    </li>
+    <li id="doc_2">
+        应用环境的安装.
+        <ol>
+            <li>
+                进入环境安装脚本目录.
+                <pre class="brush: shell;toolbar: false;">
+                	cd panda-envshell
+                </pre>
+            </li>
+            <li>
+                下载和解压缩各类软件,注意选择版本.
+                <pre class="brush: shell;toolbar: false;">
+                    ./download.sh -n redis
+                    ./download.sh -n php -v 7.0.11
+                    ./download.sh -n memcached
+                    ./download.sh -n mysql -v 5.7.14-x86_64
+                    ./download.sh -n nginx -v 1.11.4
+                    
+                    ./extract.sh -n redis
+                    ./extract.sh -n php -v 7.0.11
+                    ./extract.sh -n memcached
+                    ./extract.sh -n mysql -v 5.7.14-x86_64
+                    ./extract.sh -n nginx -v 1.11.4
+                </pre>
+            </li>
+            <li>
+                编辑各类软件的配置.包括:各类端口,用户名及密码及其他等.
+                <pre class="brush: shell;toolbar: false;">
+                    vi ./assemble/redis/3.2.8/config			#绑定IP,端口,密码,内存消耗等
+                    vi ./assemble/php/7.0.11/config				#暂无特殊配置
+                    vi ./assemble/memcached/1.4.34/config		#绑定IP,端口,内存消耗,分片因子等
+                    vi ./assemble/mysql/5.7.14-x86_64/config	#绑定端口等
+                    vi ./assemble/nginx/1.11.4/config			#主机名等
+                </pre>
+            </li>
+            <li>
+                安装软件.安装方式可能为编译安装,yum安装以及bin文件拷贝安装.
+                <pre class="brush: shell;toolbar: false;">
+                    ./install.sh -n redis
+                    ./install.sh -n php -v 7.0.11
+                    ./install.sh -n memcached
+                    ./install.sh -n mysql -v 5.7.14-x86_64
+                    ./install.sh -n nginx -v 1.11.4
+                </pre>
+            </li>
+            <li>
+                生成相关的配置文件.包括:软件自身的配置,service服务的配置,logrotate的配置等.
+                <pre class="brush: shell;toolbar: false;">
+                    ./configure.sh -n redis
+                    ./configure.sh -n php -v 7.0.11
+                    ./configure.sh -n memcached
+                    ./configure.sh -n mysql -v 5.7.14-x86_64
+                    ./configure.sh -n nginx -v 1.11.4
+                </pre>
+            </li>
+            <li>
+                通过service命令,启动软件.
+                <pre class="brush: shell;toolbar: false;">
+                    service redis start
+                    service php-fpm start
+                    service memcached start
+                    service mysqld start
+                    service nginx start
+                </pre>
+            </li>
+            <li>到这里,访问http://www.*.dev.jxulife.com 就能够看到nginx原生的404错误了.</li>
+        </ol>
+    </li>
+    <li id="doc_3">
+        环境各目录说明(后面文档均按照默认配置为准).
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <td>目录名</td>
+                    <td>用途</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>/data</td>
+                    <td>环境根目录</td>
+                </tr>
+                <tr>
+                    <td>/data/bin</td>
+                    <td>环境所需应用程序安装的目录</td>
+                </tr>
+                <tr>
+                    <td>/data/log</td>
+                    <td>各类程序产生的日志存放的目录</td>
+                </tr>
+                <tr>
+                    <td>/data/app</td>
+                    <td>web程序存放的目录</td>
+                </tr>
+                <tr>
+                    <td>/data/app/index</td>
+                    <td>web程序框架引导文件存放的目录</td>
+                </tr>
+                <tr>
+                    <td>/data/app/version</td>
+                    <td>web程序框架,正式环境的版本文件存放的目录</td>
+                </tr>
+                <tr>
+                    <td>/data/app/php_dev</td>
+                    <td>开发环境php文件存放的目录,另外包括测试环境和正式环境</td>
+                </tr>
+                <tr>
+                    <td>/data/app/page_dev</td>
+                    <td>开发环境页面模板文件存放的目录,另外包括测试环境和正式环境</td>
+                </tr>
+                <tr>
+                    <td>/data/app/static_dev</td>
+                    <td>开发环境静态文件存放的目录,另外包括测试环境和正式环境</td>
+                </tr>
+            </tbody>
+        </table>
+    </li>
+    <li id="doc_4">
+        获取,新增和编辑引导系统.
+        <ol>
+            <li>系统文件分为入口文件,函数文件和加载配置文件.入口文件(存放于 ./index 目录下)主要用于从各种运行环境中接入请求.函数文件(存放于 ./index/inc 目录下)主要保存引导系统在各种环境下的函数文件.加载配置文件(存放于 ./index/loader 中)主要保存具体业务需要加载的php文件,配置文件,模板文件,并执行框架中的入口函数.</li>
+            <li>
+                获取引导文件.
+                <pre class="brush: shell;toolbar: false;">
+        			cd /data/app
+                    git clone https://github.com/pandajingjing/panda-index.git index
+                </pre>
+            </li>
+            <li>
+                入口文件种类及说明.
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <td>文件类型</td>
+                            <td>用途</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>./console_dev.php</td>
+                            <td>开发环境命令行入口文件,另外包括测试环境和正式环境</td>
+                        </tr>
+                        <tr>
+                            <td>./launcher_dev.sh</td>
+                            <td>开发环境调用命令行入口文件的shell,另外包括测试环境和正式环境</td>
+                        </tr>
+                        <tr>
+                            <td>./mobile_dev.php</td>
+                            <td>开发环境H5端请求入口文件,另外包括测试环境和正式环境</td>
+                        </tr>
+                        <tr>
+                            <td>./service_dev.php</td>
+                            <td>开发环境内部服务接口请求入口文件,另外包括测试环境和正式环境</td>
+                        </tr>
+                        <tr>
+                            <td>./web_dev.php</td>
+                            <td>开发环境web端请求入口文件,另外包括测试环境和正式环境</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </li>
+            <li>
+                加载配置文件种类及说明.
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <td>文件类型</td>
+                            <td>用途</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>*_console.php</td>
+                            <td>命令行运行环境加载配置文件</td>
+                        </tr>
+                        <tr>
+                            <td>*_mobile.php</td>
+                            <td>H5端请求加载配置文件</td>
+                        </tr>
+                        <tr>
+                            <td>*_service.php</td>
+                            <td>内部服务请求加载配置文件</td>
+                        </tr>
+                        <tr>
+                            <td>*_web.php</td>
+                            <td>web端请求加载配置文件</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </li>
+            <li>到这里,访问http://www.*.dev.jxulife.com, 或者http://*.*.dev.jxulife.com 能够看到一个空白页,状态码是404,同时带有一个Error-Tag的头信息,标示具体的错误.</li>
+        </ol>
+    </li>
+    <li id="doc_5">
+        新增子域名开发步骤(部署,引导系统,框架等部分).我们按照新增一个demo子域名为例.
+        <ol>
+            <li>新增demo_web.php, demo_service.php.如果有H5和命令行的需要,可以再新增demo_mobile.php, demo_console.php两个文件.</li>
+            <li>新增app-demo-bclient,app-demo-service,app-demo-web,page-demo-web,static-demo-web代码仓库.如果有H5和命令行的需要,可以再新增app-demo-console,app-demo-mobile,page-demo-mobile,static-demo-mobile代码仓库.</li>
+            <li>
+                完成demo_web.php的内容
+                <pre class="brush: php;toolbar: false;">
+                    <?php
+                    panda('<?php
+                    $G_PHP_DIR = array( //需要加载的php文件夹,从上到下如果发现目标文件就加载并停止寻找
+                        PANDA_CODEPATH . \'/demo-web\',
+                        PANDA_CODEPATH . \'/demo-bclient\',
+                        PANDA_CODEPATH . \'/demo-service\',
+                        PANDA_CODEPATH . \'/system\'
+                    );
+                    
+                    $G_CONFIG_DIR = array(  //需要加载的配置文件夹,从下到上进行覆盖,优先级逐步降低
+                        PANDA_CODEPATH . \'/system/config\',
+                        PANDA_CODEPATH . \'/demo-service/config\',
+                        PANDA_CODEPATH . \'/demo-bclient/config\',
+                        PANDA_CODEPATH . \'/demo-web/config\',
+                        PANDA_CODEPATH . \'/config/demo-web\'
+                    );
+                    
+                    $G_PAGE_DIR = array(    //需要加载的模板文件夹
+                        PANDA_PAGEPATH . \'/demo-web\',
+                        PANDA_PAGEPATH . \'/system\'
+                    );
+                    
+                    include PANDA_CODEPATH . \'/system/bin.php\';   //执行框架中的入口函数
+                    bin();');
+                    ?>
+                </pre>
+            </li>
+            <li>完成其他加载配置文件的内容.</li>
+            <li>
+                假设我们使用http://demo.etc.dev.jxulife.com 这个域名环境进行开发,则根据下表获取代码仓库并上传到服务器对应位置(dev为环境名称,etc为分支环境名称).各仓库对应文件夹存放内容也在下表中对应说明.
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <td>仓库名</td>
+                            <td>上传文件夹绝对路径</td>
+                            <td>主要文件夹及内容</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>app-demo-web</td>
+                            <td>/data/app/php_dev/etc/demo-web</td>
+                            <td>web请求的controller和业务需要的一些特殊的util类.</td>
+                        </tr>
+                        <tr>
+                            <td>app-demo-mobile</td>
+                            <td>/data/app/php_dev/etc/demo-mobile</td>
+                            <td>H5请求的controller和业务需要的一些特殊的util类.</td>
+                        </tr>
+                        <tr>
+                            <td>app-demo-console</td>
+                            <td>/data/app/php_dev/etc/demo-console</td>
+                            <td>命令行请求的controller和业务需要的一些特殊的util类.</td>
+                        </tr>
+                        <tr>
+                            <td>app-demo-bclient</td>
+                            <td>/data/app/php_dev/etc/demo-bclient</td>
+                            <td>用于请求业务逻辑服务的客户端,主要是bclient类.</td>
+                        </tr>
+                        <tr>
+                            <td>app-demo-service</td>
+                            <td>/data/app/php_dev/etc/demo-service</td>
+                            <td>处理业务逻辑和数据的方法,主要是bll类以及数据交互的各种类.</td>
+                        </tr>
+                        <tr>
+                            <td>app-system</td>
+                            <td>/data/app/php_dev/etc/system</td>
+                            <td>框架中各类基类以及通用的util类.</td>
+                        </tr>
+                        <tr>
+                            <td>page-demo-web</td>
+                            <td>/data/app/page_dev/etc/demo-web</td>
+                            <td>web请求的页面模板文件.</td>
+                        </tr>
+                        <tr>
+                            <td>page-demo-mobile</td>
+                            <td>/data/app/page_dev/etc/demo-mobile</td>
+                            <td>H5请求的页面模板文件.</td>
+                        </tr>
+                        <tr>
+                            <td>page-system</td>
+                            <td>/data/app/page_dev/etc/system</td>
+                            <td>框架提供的一些基础模板文件,例如:空白页面,404页面及接口类返回格式文件.</td>
+                        </tr>
+                        <tr>
+                            <td>static-demo-web</td>
+                            <td>/data/app/static_dev/etc/demo-web</td>
+                            <td>web请求的页面静态文件.</td>
+                        </tr>
+                        <tr>
+                            <td>static-demo-mobile</td>
+                            <td>/data/app/static_dev/etc/demo-mobile</td>
+                            <td>H5请求的页面静态文件.</td>
+                        </tr>
+                        <tr>
+                            <td>static-lib</td>
+                            <td>/data/app/static_dev/etc/lib</td>
+                            <td>静态库文件,例如:jquery,bootstrap等.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </li>
+            <li>到这里,访问http://demo.etc.dev.jxulife.com 已经会出现php的错误,而不再是404错误了.</li>
+        </ol>
+    </li>
+    <li id="doc_6">
+        关于IDE配置,个人使用ZendStudio.有4个配置记录如下:
+        <ol>
+            <li><?php panda('General->Appearance->Colors and Fonts->Basic->Text Font->consoles 13'); ?></li>
+            <li><?php panda('General->Workspace->New text file line delimiter->Unix'); ?></li>
+            <li><?php panda('Team->Git->Configuration->User Settings->user.email,user.name'); ?></li>
+            <li><?php panda('Web->HTML Files->Editor->Line Width=200,删除Inline Elements,Clear all blank lines'); ?></li>
+        </ol>
+        其他都是默认配置,主要是为了统一不同操作系统和编辑器的展现差异,统一字符集等.
+    </li>
+    <li id="doc_7">
+        框架路由和自动加载的规则.
+        <ol>
+            <li>
+                web请求根据
+                <code>$_SERVER['REQUEST_URI']</code>
+                ,命令行请求根据
+                <code>$_SERVER['argv'][1]</code>
+                进行路由.
+            </li>
+            <li>框架优先根据./config/router.php 中的配置进行查找,解析出对应的控制器和参数.</li>
+            <li>如果没有找到相关的配置,则根据路由参数,按照/进行拆分为数组,最后一个作为参数,前面作为对应的controller类名.</li>
+            <li>自动加载规则按照类名用'_'拆分,然后前面作为文件夹名,形成目录关系,最后一个作为文件名</li>
+            <li>
+                例如:http://demo.etc.dev.jxulife.com/test/haha/abc,路由参数是
+                <code>/test/haha/abc</code>
+                ,abc最后会解析为参数,controller类名则是
+                <code>controller_test_haha</code>
+                , 控制器文件定位在/controller/test/haha.php中
+            </li>
+            <li>框架的首页和404页面放在/controller/home/home.php 和/controller/home/404.php</li>
+        </ol>
+    </li>
+    <li id="doc_8">
+        新增业务开发步骤(代码部分).我们按照开发http://demo.etc.dev.jxulife.com 为例.
+        <ol>
+            <li>
+                增加首页,404页面controller
+                <ol>
+                    <li>在app-demo-web中,新增/controller/home/home.php 和/controller/home/404.php文件</li>
+                    <li>
+                        继承框架中的web基类,也可以创建app自己的基类,再继承框架中的基类.例如:
+                        <pre class="brush: php;toolbar: false;">
+        					<?php
+            panda('<?php
+                                            class controller_home_home extends controller_base  //or lib_controller_web
+                                            {
+                                                function doRequest()
+                                                {
+                                                    return \'home_home\';
+                                                }
+                                            }');
+            ?>
+                        </pre>
+                        可以在controller_base中编写一些公用逻辑等.
+                        <pre class="brush: php;toolbar: false;">
+        					<?php
+            panda('<?php
+                                            abstract class controller_base extends lib_controller_web
+                                            {
+                                                function beforeRequest()
+                                                {
+                                                    parent::beforeRequest();
+                                                    // do something
+                                                }
+                                            
+                                                function afterRequest()
+                                                {
+                                                    // do something
+                                                    parent::afterRequest();
+                                                }
+                                            }');
+            ?>
+                        </pre>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                增加首页,404页面模板
+                <ol>
+                    <li>在page-demo-web中,新增/home/home.phtml 和/home/404.phtml(具体文件名和路径,请结合框架路由和调度规则,以及controller返回值确定).</li>
+                    <li>
+                        可以将公共部分提取出来,放在另外的文件中,并通过
+                        <code>$this->pandaTpl($p_sPageName, $p_aExtendDatas = []);</code>
+                        方法重复载入.
+                    </li>
+                    <li>完善页面内容后,即可看到首页和404页面的内容了.</li>
+                    <li>已上就可以完成app-demo-web仓库中controller和page-demo-web仓库中页面的添加了.</li>
+                </ol>
+            </li>
+            <li>
+                增加有关配置
+                <ol>
+                    <li>
+                        配置文件统一存放在各仓库的/config 目录中,根据加载配置文件中的文件夹及顺序,通过
+                        <code>lib_sys_var::getInstance()->getConfig($p_sKey, $p_sClass);</code>
+                        载入.
+                    </li>
+                    <li>
+                        业务中,通过在各基类中的
+                        <code>$this->getConfig($p_sKey, $p_sClass);</code>
+                        获取配置.
+                    </li>
+                    <li>
+                        配置文件主要分类以及主要配置内容说明,如下表:
+                        <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <td>配置文件名</td>
+                                    <td>文件存放内容</td>
+                                    <td>主要配置内容</td>
+                                    <td>主要配置含义</td>
+                                    <td>配置位置</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td rowspan="3">client</td>
+                                    <td rowspan="3">存放php模拟客户端的相关配置.</td>
+                                    <td>iConnectionTimeout</td>
+                                    <td>curl连接超时时间.</td>
+                                    <td>app-system</td>
+                                </tr>
+                                <tr>
+                                    <td>iExecuteTimeout</td>
+                                    <td>curl执行超时时间.</td>
+                                    <td>app-system</td>
+                                </tr>
+                                <tr>
+                                    <td>sUserAgent</td>
+                                    <td>curl默认的user agent.</td>
+                                    <td>app-system</td>
+                                </tr>
+                                <tr>
+                                    <td>common</td>
+                                    <td>无法分类,或具有共性的配置.根据下面的建议,此文件应为空.</td>
+                                    <td>无.</td>
+                                    <td>无.</td>
+                                    <td>无.</td>
+                                </tr>
+                                <tr>
+                                    <td>data</td>
+                                    <td>获取各类数据的类所需要的配置.</td>
+                                    <td>*</td>
+                                    <td>配置名称,包含获取数据的方式,连接字符串,用户名,密码等.</td>
+                                    <td>app-*-service</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">debugger</td>
+                                    <td rowspan="2">框架调试模块的配置</td>
+                                    <td>bDebug</td>
+                                    <td>全局是否打开调试模块.</td>
+                                    <td>app-system, app-*-*</td>
+                                </tr>
+                                <tr>
+                                    <td>aAllowedIpList</td>
+                                    <td>可以访问调试模块的ip地址列表.</td>
+                                    <td>app-system</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="3">domain</td>
+                                    <td rowspan="3">需要用到的各类域名.</td>
+                                    <td>sCookieDomain</td>
+                                    <td>框架发送cookie的域名</td>
+                                    <td>app-system</td>
+                                </tr>
+                                <tr>
+                                    <td>sSelfSchemeDomain</td>
+                                    <td>当前业务的域名和scheme部分.</td>
+                                    <td>app-system, app-*-web, app-*-mobile</td>
+                                </tr>
+                                <tr>
+                                    <td>sCDNSchemeDomain</td>
+                                    <td>当前业务存放静态资源的域名和scheme部分.</td>
+                                    <td>app-system, app-*-web, app-*-mobile</td>
+                                </tr>
+                                <tr>
+                                    <td>logger</td>
+                                    <td>日志记录的配置</td>
+                                    <td>sBaseDir</td>
+                                    <td>记录日志的根目录.</td>
+                                    <td>app-system</td>
+                                </tr>
+                                <tr>
+                                    <td>mail</td>
+                                    <td>邮件相关的配置</td>
+                                    <td>*</td>
+                                    <td>邮件配置的名称,值包括发送邮件的模块名称,用户名,密码等.</td>
+                                    <td>app-system, app-*-service</td>
+                                </tr>
+                                <tr>
+                                    <td>router</td>
+                                    <td>路由规则的配置</td>
+                                    <td>aRouteList</td>
+                                    <td>路由匹配规则列表.</td>
+                                    <td>app-system, app-*-service, app-*-web, app-*-mobile</td>
+                                </tr>
+                                <tr>
+                                    <td>system</td>
+                                    <td>框架以及php相关配置</td>
+                                    <td>sTimeZone</td>
+                                    <td>框架运行所在时区.</td>
+                                    <td>app-system</td>
+                                </tr>
+                                <tr>
+                                    <td>uri</td>
+                                    <td>外部域名及url拼写规则</td>
+                                    <td>*</td>
+                                    <td>域名配置名称,与domain中的需一致.内容包括url代表的功能昵称,以及拼写规则.</td>
+                                    <td>app-*-service, app-*-web, app-*-mobile</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </li>
+                    <li>建议配置文件中只存放与运维相关的配置,而与业务相关的配置应存放于数据库或者是bll的类常量.所以,除了bll有获取配置的接口外,其他的业务应用类都无法获取配置.</li>
+                    <li>可以在不同仓库中建立不同等级的配置文件,但请谨慎.最后根据开发环境或者个人情况,特殊的配置,可以放到app-config/demo-web 目录下.此目录不会进入代码仓库.</li>
+                </ol>
+            </li>
+            <li>
+                添加静态资源.
+                <ol>
+                    <li>在static-demo-web仓库中新增文件,建议按照css,js和img类别进行存放.传到服务器就可以通过http://demo.etc.dev.jxulife.com/ 进行访问.</li>
+                    <li>
+                        模板中可以通过下述方法获取完整url.
+                        <pre class="brush: php;toolbar: false;">
+        					<?php
+            panda('<?php
+                            /**
+                             * 获取静态资源路径
+                             *
+                             * @param string $p_sPath            
+                             * @param string $p_sDomainKey            
+                             * @return string
+                             */
+                            function pandaRes($p_sPath, $p_sDomainKey = \'sCDNSchemeDomain\')
+                            {
+                                $sStaticDomain = lib_sys_var::getInstance()->getConfig($p_sDomainKey, \'domain\');
+                                return $sStaticDomain . $p_sPath;
+                            }');
+            ?>
+                          </pre>
+                        sCDNSchemeDomain就是domain.php 中的配置值.
+                    </li>
+                </ol>
+            </li>
+            <li>
+                添加业务逻辑方法(返回静态数据).
+                <ol>
+                    <li>
+                        在app-demo-service仓库中添加/bll/demo/demo.php,内容如下:
+                        <pre class="brush: php;toolbar: false;">
+							<?php
+    panda('<?php
+                            class bll_demo_demo extends lib_sys_bll
+                            {
+                                function getSomeList($p_iPage)
+                                {
+                                    for ($iIndex = 0; $iIndex < 50; ++ $iIndex) {
+                                        $aTotalList[] = [
+                                            \'iAutoID\' => ($iIndex + 1),
+                                            \'sName\' => util_string::getRand(10)
+                                        ];
+                                    }
+                                    $iPageSize = 5;
+                                    $iOffset = ($p_iPage - 1) * $iPageSize;
+                                    $aList = array_slice($aTotalList, $iOffset, $iPageSize);
+                                    return $this->returnList($aList, count($aTotalList));
+                                }
+                            }');
+    ?>
+					</pre>
+                    </li>
+                    <li>
+                        在app-demo-bclient仓库中添加/bclient/demo/demo.php,内容如下:
+                        <pre class="brush: php;toolbar: false;">
+							<?php
+    panda('<?php
+                                class bclient_demo_demo extends lib_sys_bclient
+                                {
+                                    static function getSomeList($p_iPage)
+                                    {
+                                        return parent::_call(__CLASS__, __FUNCTION__, func_get_args());
+                                    }
+                                }');
+    ?>
+						</pre>
+                    </li>
+                    <li>为了避免冲突,请在类别文件夹(bclient/bll)下增加app名称后再存放文件.</li>
+                    <li>bll和bclient中的方法总是成对出现,bclient里面的所有的方法主体均和上述例子一样,而bll中则是具体的业务逻辑的实现.</li>
+                    <li>在controller里面调用bclient里面的方法进行业务逻辑的处理,完成业务实现.</li>
+                </ol>
+            </li>
+            <li>
+                添加业务逻辑方法(增删改查).
+                <ol>
+                    <li>
+                        按照如下语句创建数据表(假设使用mysql).
+                        <pre class="brush: sql;toolbar: false;">
+    						CREATE TABLE `t_demo` (
+                              `iAutoID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+                              `sName` varchar(255) NOT NULL DEFAULT '''''' COMMENT '姓名',
+                              `iAddTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '成员添加时间',
+                              `iCreateTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '数据创建时间',
+                              `iUpdateTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '数据最后更新时间',
+                              `iDeleteTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '数据逻辑删除时间',
+                              PRIMARY KEY (`iAutoID`)
+                            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    					</pre>
+                    </li>
+                    <li>
+                        在app-demo-service仓库添加/config/data.php, 用于保存相关数据库和memcache的配置.
+                        <pre class="brush: php;toolbar: false;">
+							<?php
+    panda('<?php
+                                return [
+                                    \'demo_db\' => [
+                                        \'sType\' => \'mysql\',
+                                        \'sDSN\' => \'mysql:host=127.0.0.1;dbname=demo_db;port=3306\',
+                                        \'sUserName\' => \'user_name\',
+                                        \'sUserPassword\' => \'user_password\',
+                                        \'aInitSQL\' => [
+                                            \'set names utf8\'
+                                        ]
+                                    ],
+                                    \'ormcache\' => [
+                                        \'sType\' => \'memcached\',
+                                        \'aServerList\' => [
+                                            [
+                                                \'127.0.0.1\',
+                                                11211,
+                                                1
+                                            ]
+                                        ]
+                                    ]
+                                ];');
+    ?>
+						</pre>
+                    </li>
+                    <li>在app-demo-service仓库添加/orm/demo.php,orm是框架提供用于访问数据库及缓存的中间件.完善数据库连接配置名,数据库表结构,orm数据结构的说明.</li>
+                    <li>在app-demo-service仓库中的/bll/demo.php中增加各种操作orm的方法,在app-demo-bclient仓库中的/bclient/demo.php中增加对应的方法即可.</li>
+                </ol>
+            </li>
+        </ol>
+    </li>
+</ol>
+<?php
+$this->pandaTpl('component_bottom', array(
+    'aJSFiles' => [
+        '/lib/js/syntaxhighlighter/3.0.83/shCore.js',
+        '/lib/js/syntaxhighlighter/3.0.83/shBrushBash.js',
+        '/lib/js/syntaxhighlighter/3.0.83/shBrushPhp.js',
+        '/lib/js/syntaxhighlighter/3.0.83/shBrushSql.js',
+        '/blank_web/js/doc.js'
+    ]
+));
+?>
