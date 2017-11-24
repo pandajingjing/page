@@ -12,30 +12,11 @@ $this->pandaTpl('component_top', array(
     <h1>文档内容</h1>
 </div>
 <ol>
+    <?php foreach($aChapterList as $aChapter){ ?>
     <li>
-        <a href="#" class="anchor" data-anchor-target="doc_1">服务器及系统环境的相关配置.</a>
+        <a href="<?php panda($aChapter['sUrl']); ?>" class="anchor" target="doc" data-anchor-target="<?php panda($aChapter['sAnchor']); ?>"><?php panda($aChapter['sTitle']); ?></a>
     </li>
-    <li>
-        <a href="#" class="anchor" data-anchor-target="doc_2">应用环境的安装.</a>
-    </li>
-    <li>
-        <a href="#" class="anchor" data-anchor-target="doc_3">环境各目录说明.</a>
-    </li>
-    <li>
-        <a href="#" class="anchor" data-anchor-target="doc_4">获取,新增和编辑引导系统.</a>
-    </li>
-    <li>
-        <a href="#" class="anchor" data-anchor-target="doc_5">新增子域名开发步骤.</a>
-    </li>
-    <li>
-        <a href="#" class="anchor" data-anchor-target="doc_6">关于IDE配置,个人使用ZendStudio.</a>
-    </li>
-    <li>
-        <a href="#" class="anchor" data-anchor-target="doc_7">框架路由和自动加载的规则.</a>
-    </li>
-    <li>
-        <a href="#" class="anchor" data-anchor-target="doc_8">新增业务开发步骤.</a>
-    </li>
+    <?php } ?>
 </ol>
 <ol>
     <li id="doc_1">
