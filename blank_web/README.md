@@ -1,4 +1,4 @@
-# page-blank-web
+# page-blank_web
 
 业务频道页面结构
 

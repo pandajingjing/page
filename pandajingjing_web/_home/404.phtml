@@ -1,0 +1,24 @@
+<?php
+/**
+ * 首页
+ */
+tLoadTpl('global_topnav', array(
+    'sNavActiveKey' => 'home',
+    'aCSSURLs' => array(),
+    'sPageTitle' => '健身...木有啦',
+    'aTopURLs' => $aTopURLs
+));
+?>
+<div class="jumbotron">
+	<h1>404</h1>
+	<p>没了，没了，你怎么点到这里来的？？</p>
+	<p>
+		<a class="btn btn-primary btn-lg" href="<?php tEcho($aTopURLs['sHomeURL']); ?>" role="button">返回首页</a>
+	</p>
+</div>
+<?php
+
+tLoadTpl('global_bottom', array(
+    'aJSURLs' => array()
+));
+?>

@@ -1,4 +1,4 @@
-# page-duorou_web
+# page-pandajingjing_web
 
 业务频道页面结构
 
