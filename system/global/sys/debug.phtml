@@ -46,7 +46,7 @@
         	<?php $iIndex=0;foreach($aMessages as $aDebugMsg){ ?>
         	<tr>
     			<td><?php panda(++$iIndex); ?></td>
-    			<td><?php $aDebugMsg['bIsHTML']?pandaHtml($aDebugMsg['sMsg']):panda($aDebugMsg['sMsg']); ?></td>
+    			<td><?php $aDebugMsg['bIsHtml']?pandaHtml($aDebugMsg['sMsg']):panda($aDebugMsg['sMsg']); ?></td>
     		</tr>
         	<?php } ?>
     	</tbody>

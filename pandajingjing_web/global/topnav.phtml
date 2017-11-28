@@ -16,19 +16,19 @@ tLoadTpl('frame_head', array(
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li <?php if($sNavActiveKey=='home'){ ?> class="active" <?php } ?>>
-					<a href="<?php tEcho($aTopURLs['sHomeURL']); ?>"> 首页 </a>
+					<a href="<?php tEcho($aTopUrls['sHomeURL']); ?>"> 首页 </a>
 				</li>
 				<li <?php if($sNavActiveKey=='article'){ ?> class="active" <?php } ?>>
-					<a href="<?php tEcho($aTopURLs['sHomeURL']); ?>">健身文章</a>
+					<a href="<?php tEcho($aTopUrls['sHomeURL']); ?>">健身文章</a>
 				</li>
 				<li <?php if($sNavActiveKey=='diet'){ ?> class="active" <?php } ?>>
-					<a href="<?php tEcho($aTopURLs['sDietURL']); ?>">健身饮食</a>
+					<a href="<?php tEcho($aTopUrls['sDietURL']); ?>">健身饮食</a>
 				</li>
 				<li <?php if($sNavActiveKey=='motion'){ ?> class="active" <?php } ?>>
-					<a href="<?php tEcho($aTopURLs['sMotionURL']); ?>">健身动作</a>
+					<a href="<?php tEcho($aTopUrls['sMotionURL']); ?>">健身动作</a>
 				</li>
 				<li <?php if($sNavActiveKey=='journal'){ ?> class="active" <?php } ?>>
-					<a href="<?php tEcho($aTopURLs['sHomeURL']); ?>">健身日志</a>
+					<a href="<?php tEcho($aTopUrls['sHomeURL']); ?>">健身日志</a>
 				</li>
 				<li
 					class="dropdown<?php if(in_array($sNavActiveKey,array('about-treadmill','about-dumbbell','about-bmi'))){ ?> active<?php } ?>">
@@ -38,15 +38,15 @@ tLoadTpl('frame_head', array(
 					</a>
 					<ul class="dropdown-menu" role="menu">
 						<li <?php if($sNavActiveKey=='about-treadmill'){ ?> class="active" <?php } ?>>
-							<a href="<?php tEcho($aTopURLs['sAboutTreadmillURL']); ?>">跑步机</a>
+							<a href="<?php tEcho($aTopUrls['sAboutTreadmillURL']); ?>">跑步机</a>
 						</li>
 						<li class="divider"></li>
 						<li <?php if($sNavActiveKey=='abount-dumbbell'){ ?> class="active" <?php } ?>>
-							<a href="<?php tEcho($aTopURLs['sAboutDumbbellURL']); ?>">哑铃</a>
+							<a href="<?php tEcho($aTopUrls['sAboutDumbbellURL']); ?>">哑铃</a>
 						</li>
 						<li class="divider"></li>
 						<li <?php if($sNavActiveKey=='about-bmi'){ ?> class="active" <?php } ?>>
-							<a href="<?php tEcho($aTopURLs['sAboutBMIURL']); ?>">BMI</a>
+							<a href="<?php tEcho($aTopUrls['sAboutBMIURL']); ?>">BMI</a>
 						</li>
 					</ul>
 				</li>

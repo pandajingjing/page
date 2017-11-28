@@ -563,7 +563,7 @@ $this->pandaTpl('global_top', array(
                                     <td>app-system, app-*-web, app-*-mobile</td>
                                 </tr>
                                 <tr>
-                                    <td>sCDNSchemeDomain</td>
+                                    <td>sCdnSchemeDomain</td>
                                     <td>当前业务存放静态资源的域名和scheme部分.</td>
                                     <td>app-system, app-*-web, app-*-mobile</td>
                                 </tr>
@@ -625,14 +625,14 @@ $this->pandaTpl('global_top', array(
                              * @param string $p_sDomainKey            
                              * @return string
                              */
-                            function pandaRes($p_sPath, $p_sDomainKey = \'sCDNSchemeDomain\')
+                            function pandaRes($p_sPath, $p_sDomainKey = \'sCdnSchemeDomain\')
                             {
                                 $sStaticDomain = lib_sys_var::getInstance()->getConfig($p_sDomainKey, \'domain\');
                                 return $sStaticDomain . $p_sPath;
                             }');
             ?>
                           </pre>
-                        sCDNSchemeDomain就是domain.php 中的配置值.
+                        sCdnSchemeDomain就是domain.php 中的配置值.
                     </li>
                 </ol>
             </li>
@@ -650,7 +650,7 @@ $this->pandaTpl('global_top', array(
                                 {
                                     for ($iIndex = 0; $iIndex < 50; ++ $iIndex) {
                                         $aTotalList[] = [
-                                            \'iAutoID\' => ($iIndex + 1),
+                                            \'iAutoId\' => ($iIndex + 1),
                                             \'sName\' => util_string::getRand(10)
                                         ];
                                     }
@@ -690,13 +690,13 @@ $this->pandaTpl('global_top', array(
                         按照如下语句创建数据表(假设使用mysql).
                         <pre class="brush: sql;toolbar: false;">
     						CREATE TABLE `t_demo` (
-                              `iAutoID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+                              `iAutoId` int(10) unsigned NOT NULL AUTO_INCREMENT,
                               `sName` varchar(255) NOT NULL DEFAULT '''''' COMMENT '姓名',
                               `iAddTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '成员添加时间',
                               `iCreateTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '数据创建时间',
                               `iUpdateTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '数据最后更新时间',
                               `iDeleteTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '数据逻辑删除时间',
-                              PRIMARY KEY (`iAutoID`)
+                              PRIMARY KEY (`iAutoId`)
                             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
     					</pre>
                     </li>
@@ -708,7 +708,7 @@ $this->pandaTpl('global_top', array(
                                 return [
                                     \'demo_db\' => [
                                         \'sType\' => \'mysql\',
-                                        \'sDSN\' => \'mysql:host=127.0.0.1;dbname=demo_db;port=3306\',
+                                        \'sDsn\' => \'mysql:host=127.0.0.1;dbname=demo_db;port=3306\',
                                         \'sUserName\' => \'user_name\',
                                         \'sUserPassword\' => \'user_password\',
                                         \'aInitSQL\' => [
