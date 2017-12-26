@@ -1,5 +1,5 @@
 <?php
-$this->pandaTpl('global_top', array(
+$this->pandaTpl('/global/top', array(
     'sPageTitle' => '说明文档-文档',
     'aCssFiles' => [
         '/lib/css/syntaxhighlighter/3.0.83/shCore.css',
@@ -474,7 +474,7 @@ $this->pandaTpl('global_top', array(
                     <li>在page-demo-web中,新增/home/home.phtml 和/home/404.phtml(具体文件名和路径,请结合框架路由和调度规则,以及controller返回值确定).</li>
                     <li>
                         可以将公共部分提取出来,放在另外的文件中,并通过
-                        <code>$this->pandaTpl($p_sPageName, $p_aExtendDatas = []);</code>
+                        <code>$this->pandaTpl($p_sSubPath, $p_aExtendDatas = []);</code>
                         方法重复载入.
                     </li>
                     <li>完善页面内容后,即可看到首页和404页面的内容了.</li>
@@ -737,7 +737,7 @@ $this->pandaTpl('global_top', array(
     </li>
 </ol>
 <?php
-$this->pandaTpl('global_bottom', array(
+$this->pandaTpl('/global/bottom', array(
     'aJSFiles' => [
         '/lib/js/syntaxhighlighter/3.0.83/shCore.js',
         '/lib/js/syntaxhighlighter/3.0.83/shBrushBash.js',

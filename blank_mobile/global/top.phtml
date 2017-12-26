@@ -6,12 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="icon" href="<?php panda(pandaRes('/lib/img/favicon_panda_head_96px.png')); ?>">
+<link href="<?php panda(pandaRes('/lib/img/favicon_panda_head_96px.png')); ?>" rel="icon" />
 <title><?php panda($sPageTitle); ?></title>
-<link href="<?php panda(pandaRes('/lib/css/bootstrap/3.3.0.min.css')); ?>" rel="stylesheet">
-<link href="<?php panda(pandaRes('/blank_mobile/css/global.css')); ?>" rel="stylesheet">
+<link href="<?php panda(pandaRes('/lib/css/bootstrap/3.3.0.min.css')); ?>" rel="stylesheet" />
+<link href="<?php panda(pandaRes('/blank_mobile/css/global.css')); ?>" rel="stylesheet" />
 <?php foreach($aCssFiles as $sFile){ ?>
-<link href="<?php panda(pandaRes($sFile)); ?>" rel="stylesheet">
+<link href="<?php panda(pandaRes($sFile)); ?>" rel="stylesheet" />
 <?php } ?>
 </head>
 <body>

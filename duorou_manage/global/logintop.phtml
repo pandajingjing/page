@@ -17,28 +17,32 @@
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="<?php panda($aTopUrls['sDefault']); ?>">说明文档</a>
+                <a class="navbar-brand" href="<?php panda($aTopUrls['sDefault']); ?>">多肉管理</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li <?php if('default'==$sShowTap){ ?> class="active" <?php } ?>>
                         <a href="<?php panda($aTopUrls['sDefault']); ?>">首页</a>
                     </li>
-                    <li class="dropdown<?php if('doc'==$sShowTap){ ?> active<?php } ?>">
+                    <li class="dropdown<?php if('stock'==$sShowTap){ ?> active<?php } ?>">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            文档
+                            进货单管理
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <?php foreach($aTopUrls['aChapterList'] as $aChapter){ ?>
                             <li>
-                                <a href="<?php panda($aChapter['sUrl']); ?>" class="anchor" target="doc" data-anchor-target="<?php panda($aChapter['sAnchor']); ?>"><?php panda($aChapter['sTitle']); ?></a>
+                                <a href="<?php panda($aTopUrls['aStock']['sAddNew']); ?>">添加新进货单</a>
                             </li>
-                            <?php } ?>
+                            <li>
+                                <a href="<?php panda($aTopUrls['aStock']['sListing']); ?>">进货单列表</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="<?php panda($aTopUrls['sLogOut']); ?>">退出</a>
+                    </li>
                     <li class="active">
                         <a href="#" class="backtotop">返回顶部</a>
                     </li>

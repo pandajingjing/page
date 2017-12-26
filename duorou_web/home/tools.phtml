@@ -1,0 +1,146 @@
+<?php
+$this->pandaTpl('/global/top', array(
+    'sPageTitle' => '匠心多肉-工具',
+    'aCssFiles' => [],
+    'sShowTap' => 'default'
+));
+?>
+<?php if($sNextAction=='save'){ ?>
+<form class="form-horizontal">
+    <?php foreach($aContent as $sChannel => $aChannelContent){ ?>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">渠道</label>
+        <div class="col-sm-5">
+            <p class="form-control-static">
+                <?php panda($aChannelContent['sRemark']); ?>
+                <a href="#" class="anchor" data-anchor-target="dataform">修改内容</a>
+            </p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">位置</label>
+        <div class="col-sm-5">
+            <p class="form-control-static"><?php panda($aChannelContent['sPlace']); ?></p>
+        </div>
+    </div>
+    <?php if(isset($aChannelContent['sTitle'])){ ?>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">标题</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" placeholder="标题" value="<?php panda($aChannelContent['sTitle']); ?>">
+        </div>
+    </div>
+    <?php } ?>
+    <?php for($iIndex=1;;++$iIndex){ ?>
+        <?php $sKey='sContent'.$iIndex;if(isset($aChannelContent[$sKey])){ ?>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">第<?php panda($iIndex); ?>楼</label>
+        <div class="col-sm-5">
+            <textarea class="form-control" rows="5"><?php panda($aChannelContent[$sKey]); ?></textarea>
+        </div>
+    </div>
+        <?php }else{ break; } ?>
+    <?php } ?>
+    <hr />
+    <?php } ?>
+</form>
+<?php } ?>
+<form action="" method="post" enctype="application/x-www-form-urlencoded" class="form-horizontal" id="dataform">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">类型</label>
+        <div class="col-sm-5">
+            <label class="radio-inline" for="type_rand">
+                <input type="radio" name="type" id="type_rand" value="rand" <?php if($aFormData['eType']=='rand'){ ?> checked="checked" <?php } ?>>
+                随机不挑
+            </label>
+            <label class="radio-inline" for="type_one">
+                <input type="radio" name="type" id="type_one" value="one" <?php if($aFormData['eType']=='one'){ ?> checked="checked" <?php } ?>>
+                一物一拍
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="date" class="col-sm-2 control-label">日期</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" id="date" name="date" placeholder="日期" value="<?php panda($aFormData['sDate']); ?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="pinzhong" class="col-sm-2 control-label">品种</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" id="pinzhong" name="pinzhong" placeholder="品种" value="<?php panda($aFormData['sPinZhong']); ?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="randword" class="col-sm-2 control-label">随意的话</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" id="randword" name="randword" placeholder="随意的话" value="<?php panda($aFormData['sRandWord']); ?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">规格</label>
+        <div class="col-sm-5">
+            <label class="radio-inline" for="spec_one">
+                <input type="radio" name="spec" id="spec_one" value="one" <?php if($aFormData['eSpec']=='one'){ ?> checked="checked" <?php } ?>>
+                单头
+            </label>
+            <label class="radio-inline" for="spec_two">
+                <input type="radio" name="spec" id="spec_two" value="two" <?php if($aFormData['eSpec']=='two'){ ?> checked="checked" <?php } ?>>
+                双头
+            </label>
+            <label class="radio-inline" for="spec_more">
+                <input type="radio" name="spec" id="spec_more" value="more" <?php if($aFormData['eSpec']=='more'){ ?> checked="checked" <?php } ?>>
+                群生
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="size" class="col-sm-2 control-label">尺寸</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" id="size" name="size" placeholder="单位:厘米" value="<?php panda($aFormData['fSize']); ?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="year" class="col-sm-2 control-label">年次</label>
+        <div class="col-sm-5">
+            <select class="form-control" name="year" id="year">
+                <?php for($iIndex=1;$iIndex<11;++$iIndex){ ?>
+                <option value="<?php panda($iIndex); ?>" <?php if($aFormData['iYear']==$iIndex){ ?> selected="selected" <?php } ?>><?php panda($iIndex); ?></option>
+                <?php } ?>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="price" class="col-sm-2 control-label">价格</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" id="price" name="price" placeholder="单位:元" value="<?php panda($aFormData['fPrice']); ?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">快递方式</label>
+        <div class="col-sm-5">
+            <label class="radio-inline" for="express_all">
+                <input type="radio" name="express" id="express_all" value="all" <?php if($aFormData['eExpress']=='all'){ ?> checked="checked" <?php } ?>>
+                包邮
+            </label>
+            <label class="radio-inline" for="express_df">
+                <input type="radio" name="express" id="express_df" value="df" <?php if($aFormData['eExpress']=='df'){ ?> checked="checked" <?php } ?>>
+                到付
+            </label>
+            <label class="radio-inline" for="express_kd">
+                <input type="radio" name="express" id="express_kd" value="kd" <?php if($aFormData['eExpress']=='kd'){ ?> checked="checked" <?php } ?>>
+                快递
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-5">
+            <input type="hidden" name="next_action" value="save" />
+            <button type="submit" class="btn btn-default">提交</button>
+        </div>
+    </div>
+</form>
+<?php
+$this->pandaTpl('/global/bottom', array(
+    'aJSFiles' => []
+));

@@ -3,20 +3,27 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="icon" href="<?php panda(pandaRes('/lib/img/favicon_panda_head_96px.png')); ?>">
+<link href="<?php panda(pandaRes('/lib/img/favicon_panda_head_96px.png')); ?>" rel="icon" />
 <title><?php panda($sPageTitle); ?></title>
-<link href="<?php panda(pandaRes('/lib/css/bootstrap/3.3.0.min.css')); ?>" rel="stylesheet">
-<link href="<?php panda(pandaRes('/duorou_web/css/global.css')); ?>" rel="stylesheet">
+<link href="<?php panda(pandaRes('/lib/css/bootstrap/3.3.0.min.css')); ?>" rel="stylesheet" />
+<link href="<?php panda(pandaRes('/duorou_web/css/global.css')); ?>" rel="stylesheet" />
 <?php foreach($aCssFiles as $sFile){ ?>
-<link href="<?php panda(pandaRes($sFile)); ?>" rel="stylesheet">
+<link href="<?php panda(pandaRes($sFile)); ?>" rel="stylesheet" />
 <?php } ?>
 </head>
 <body>
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
                 <a class="navbar-brand" href="<?php panda($aTopUrls['sDefault']); ?>">匠心多肉</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
