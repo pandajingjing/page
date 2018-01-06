@@ -1,0 +1,12 @@
+<li>
+    <a href="<?php panda($sBreadHomeUrl); ?>"><?php pandaLang('/manage/global/home'); ?></a>
+</li>
+<?php
+$aLastUrl = array_pop($aCrumbUrls);
+foreach ($aCrumbUrls as $aUrl) {
+    ?>
+<li>
+    <a href="<?php panda($aUrl[0]); ?>"><?php panda($aUrl[1]); ?></a>
+</li>
+<?php } ?>
+<li class="active"><?php panda($aLastUrl[0]); ?></li>

@@ -5,6 +5,159 @@ $this->pandaTpl('/global/logintop', array(
     'sShowTap' => 'default'
 ));
 ?>
+
+<?php
+
+$aJiangLiCfgs = [
+    // [
+    // 101, // 累计金额达到101
+    // 1000
+    // ], // 赠送1000积分
+    [
+        501, // 500
+        2000
+    ],
+    [
+        1001, // 500
+        3000
+    ],
+    [
+        2001, // 1000
+        8000
+    ],
+    [
+        4001, // 2000
+        22000
+    ],
+    [
+        7001, // 3000
+        45000
+    ],
+    [
+        10001, // 3000
+        60000
+    ]
+]; // 奖励积分设置
+
+$aJiFenJinECfgs = [
+    [
+        90000, // 9折
+        1000
+    ],
+    [
+        47500, // 95折
+        500
+    ],
+    [
+        9700, // 97折
+        100
+    ],
+    [
+        4900, // 98折
+        50
+    ],
+    [
+        100,
+        1
+    ]
+]; // 兑换积分设置
+?>
+<div>1元10积分,100积分兑换1元.消费金额每年2月底和8月底清0.</div>
+<h3>奖励积分计算公式</h3>
+<table class="table table-striped table-bordered table-hover table-condensed">
+    <tr>
+        <td>达到金额</td>
+        <td>获赠积分</td>
+        <td>到达该金额需要额外支付的价格</td>
+        <td>额外支付1元可获得的积分</td>
+    </tr>
+    <?php
+    $iCount = count($aJiangLiCfgs);
+    for ($iIndex = 0; $iIndex < $iCount; ++ $iIndex) {
+        $iChaJia = ($aJiangLiCfgs[$iIndex][0] - (isset($aJiangLiCfgs[$iIndex - 1]) ? $aJiangLiCfgs[$iIndex - 1][0] : 0));
+        ?>
+    <tr>
+        <td><?php panda($aJiangLiCfgs[$iIndex][0]); ?></td>
+        <td><?php panda($aJiangLiCfgs[$iIndex][1]); ?></td>
+        <td><?php panda($iChaJia); ?></td>
+        <td><?php panda(round($aJiangLiCfgs[$iIndex][1]/$iChaJia,0)); ?></td>
+    </tr>
+    <?php } ?>
+</table>
+<h3>积分兑换计算公式</h3>
+<table class="table table-striped table-bordered table-hover table-condensed">
+    <tr>
+        <td>使用积分</td>
+        <td>兑换金额</td>
+        <td>每100积分可兑换的金额</td>
+    </tr>
+    <?php foreach($aJiFenJinECfgs as $aCfg){ ?>
+    <tr>
+        <td><?php panda($aCfg[0]); ?></td>
+        <td><?php panda($aCfg[1]); ?></td>
+        <td><?php panda(round($aCfg[1]/$aCfg[0]*100,2)); ?></td>
+    </tr>
+    <?php } ?>
+</table>
+<h3>实际模拟情况</h3>
+<table class="table table-striped table-bordered table-hover table-condensed">
+    <tr>
+        <td>消费金额</td>
+        <td>累计积分</td>
+        <td>奖励积分</td>
+        <td>总积分</td>
+        <td>积分兑换金额</td>
+        <td>折扣率</td>
+        <td>消费实际成本</td>
+        <td>积分实际成本</td>
+        <td>实际赚钱</td>
+        <td>毛利率</td>
+    </tr>
+<?php
+$iHowMuch = 10001; // 单次下单金额
+for ($iHowMuch = 100; $iHowMuch < 15001; $iHowMuch = $iHowMuch + 100) {
+    $iLeiJiJiFen = $iHowMuch * 11; // 正常购买累计积分
+                                   // $iLeiJiJiFen = $iLeiJiJiFen * 6 * 2; // 邀请好友购买,且最大倍积分的累计积分
+    $iHowMuchCost = $iHowMuch * 0.2; // 消费的实际成本
+    
+    $iJiangLiJiFen = 0; // 奖励积分
+    foreach ($aJiangLiCfgs as $aCfg) {
+        if ($iHowMuch >= $aCfg[0]) {
+            $iJiangLiJiFen = $iJiangLiJiFen + $aCfg[1];
+        }
+    }
+    
+    $iLeftJiFen = $iTotalJiFen = $iLeiJiJiFen + $iJiangLiJiFen; // 总积分,剩余积分
+    $iJiFenJinE = 0; // 积分兑换金额
+    
+    foreach ($aJiFenJinECfgs as $aCfg) {
+        $iJiFenDuiHuan = floor($iLeftJiFen / $aCfg[0]);
+        if ($iJiFenDuiHuan > 0) {
+            $iJiFenJinE = $iJiFenJinE + $aCfg[1] * $iJiFenDuiHuan;
+            $iLeftJiFen = $iLeftJiFen - $aCfg[0] * $iJiFenDuiHuan;
+        }
+    }
+    $iJiFenJinECost = $iJiFenJinE * 0.2; // 积分金额兑换的实际成本
+    $iTotalGet = $iHowMuch - $iHowMuchCost - $iJiFenJinECost; // 实际赚钱
+    $iTotalGetPercent = round($iTotalGet / ($iHowMuchCost + $iJiFenJinECost), 4) * 100;
+    $iTotalPercent = round(($iHowMuch - $iJiFenJinE) / $iHowMuch, 4) * 100;
+    ?>
+    <tr>
+        <td><?php panda($iHowMuch); ?></td>
+        <td><?php panda($iLeiJiJiFen); ?></td>
+        <td><?php panda($iJiangLiJiFen); ?></td>
+        <td><?php panda($iTotalJiFen); ?></td>
+        <td><?php panda($iJiFenJinE); ?></td>
+        <td><?php panda($iTotalPercent); ?>%</td>
+        <td><?php panda($iHowMuchCost); ?></td>
+        <td><?php panda($iJiFenJinECost); ?></td>
+        <td><?php panda($iTotalGet); ?></td>
+        <td><?php panda($iTotalGetPercent); ?>%</td>
+    </tr>
+<?php
+}
+?>
+</table>
 <?php
 $this->pandaTpl('/global/bottom', array(
     'aJSFiles' => []
