@@ -9,11 +9,11 @@
 		title="版权说明" data-content="本博客健身及饮食类文章均来自互联网,版权归对应网站或个人所有.部分转载只为说明相关观点.如有侵权请告之.">硬派健身</a>
 	"
 </div>
-<img id="qrcode" class="qrcode-small" src="<?php tEcho(getRes('/bodybuild/img/qrcode.png')); ?>" />
+<img id="qrcode" class="qrcode-small" src="<?php pandaRes('/bodybuild/img/qrcode.png'); ?>" />
 </div>
-<script src="<?php tEcho(getRes('/lib/jquery/1.11.2/jquery.min.js')); ?>"></script>
-<script src="<?php tEcho(getRes('/lib/bootstrap/3.3.4/js/bootstrap.min.js')); ?>"></script>
-<script src="<?php tEcho(getRes('/bodybuild/global.js')); ?>"></script>
+<script src="<?php pandaRes('/lib/jquery/1.11.2/jquery.min.js'); ?>"></script>
+<script src="<?php pandaRes('/lib/bootstrap/3.3.4/js/bootstrap.min.js'); ?>"></script>
+<script src="<?php pandaRes('/bodybuild/global.js'); ?>"></script>
 <?php foreach($aJSURL as $sJSURL){ ?>
 <script src="<?php tEcho(getRes($sJSURL)); ?>"></script>
 <?php } ?>

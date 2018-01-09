@@ -6,13 +6,13 @@
 <meta name="renderer" content="webkit">
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> -->
 <title><?php tEcho($sPageTitle);  ?></title>
-<link rel="stylesheet" href="<?php tEcho(getRes('/lib/bootstrap/3.3.4/css/bootstrap.min.css')); ?>" />
-<link rel="stylesheet" href="<?php tEcho(getRes('/bodybuild/global.css')); ?>" />
+<link rel="stylesheet" href="<?php pandaRes('/lib/bootstrap/3.3.4/css/bootstrap.min.css'); ?>" />
+<link rel="stylesheet" href="<?php pandaRes('/bodybuild/global.css'); ?>" />
 <?php foreach($aCSSURL as $sCSSURL){ ?>
 <link rel="stylesheet" href="<?php tEcho(getRes($sCSSURL)); ?>" />
 <?php } ?>
-<link rel="shortcut icon" href="<?php tEcho(getRes('/global/favicon.ico')); ?>" />
-<link rel="bookmark" href="<?php tEcho(getRes('/global/favicon.ico')); ?>" />
+<link rel="shortcut icon" href="<?php pandaRes('/global/favicon.ico'); ?>" />
+<link rel="bookmark" href="<?php pandaRes('/global/favicon.ico'); ?>" />
 <meta name="baidu_union_verify" content="fa0852d09d05160ca5425cc1444d27d7">
 <script>
 var _hmt = _hmt || [];
@@ -29,7 +29,7 @@ var _hmt = _hmt || [];
 		<div class="container" id="top">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#">
-					<img src="<?php tEcho(getRes('/bodybuild/img/logo.jpg')); ?>" alt="logo" width="30" class="img-circle" />
+					<img src="<?php pandaRes('/bodybuild/img/logo.jpg'); ?>" alt="logo" width="30" class="img-circle" />
 				</a>
 			</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
