@@ -1,14 +1,14 @@
 </div>
 <footer class="footer">
-	<div class="container">
-		<div class="footerinfo">
+    <div class="container">
+        <div class="footerinfo">
 			北京时间:<?php panda(date('Y-m-d H:i:s',$iVisitTime)); ?> 沪ICP备15010464号 IP:<?php panda($sRemoteIp); ?> 运行时间:<?php panda(round($fScriptTime*1000,3)); ?>毫秒
 		</div>
-	</div>
+    </div>
 </footer>
 <script src="<?php pandaRes('/lib/js/jquery/3.1.0.min.js'); ?>"></script>
 <script src="<?php pandaRes('/lib/js/bootstrap/3.3.0.min.js'); ?>"></script>
-<script src="<?php pandaRes('/wolong_web/js/global.js'); ?>"></script>
+<script src="<?php pandaRes('/lib/suit/myboot/global.js'); ?>"></script>
 <?php foreach($aJSFiles as $sFile){ ?>
 <script src="<?php pandaRes($sFile); ?>"></script>
 <?php } ?>
