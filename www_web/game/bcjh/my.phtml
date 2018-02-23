@@ -1,0 +1,146 @@
+<?php
+$this->pandaTpl('/global/top', array(
+    'sPageTitle' => '游戏助手-爆炒江湖-我的',
+    'aCssFiles' => [],
+    'sShowTap' => 'default'
+));
+?>
+<div class="row">
+    <div class="col-sm-6">
+        <h1>获取符文的厨师</h1>
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <td class="col-sm-2">厨师</td>
+                    <td>菜谱</td>
+                </tr>
+            </thead>
+            <tbody>
+    <?php foreach($aIWantRunesChefs as $aChef){ ?>
+        <tr>
+                    <td><?php panda($aChef['sName']); ?></td>
+                    <td><?php panda(implode(', ',$aChef['aRecipes'])); ?></td>
+                </tr>
+    <?php } ?>
+    </tbody>
+        </table>
+    </div>
+    <div class="col-sm-6">
+        <h1>获取的符文</h1>
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <td>符文名称</td>
+                </tr>
+            </thead>
+            <tbody>
+    <?php foreach($aIWantRuneNames as $sName){ ?>
+        <tr>
+                    <td><?php panda($sName); ?></td>
+                </tr>
+    <?php } ?>
+    </tbody>
+        </table>
+    </div>
+</div>
+<h1>神级解锁菜单</h1>
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+            <td>#</td>
+            <td>名称</td>
+            <td>星级</td>
+            <td>炒</td>
+            <td>煮</td>
+            <td>切</td>
+            <td>炸</td>
+            <td>烤</td>
+            <td>蒸</td>
+            <td>解锁</td>
+            <td>厨师</td>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach($aICanUnlockRecipes as $aRecipe){ ?>
+        <tr <?php if($aRecipe['iGet']){ ?> class="success" <?php } ?>>
+            <td><?php panda($aRecipe['recipeId']); ?></td>
+            <td><?php panda($aRecipe['name']); ?></td>
+            <td><?php panda($aRecipe['fire']); ?></td>
+            <td><?php panda($aRecipe['stirfry']); ?></td>
+            <td><?php panda($aRecipe['boil']); ?></td>
+            <td><?php panda($aRecipe['cut']); ?></td>
+            <td><?php panda($aRecipe['fry']); ?></td>
+            <td><?php panda($aRecipe['roast']); ?></td>
+            <td><?php panda($aRecipe['steam']); ?></td>
+            <td><?php panda($aRecipe['unlock']); ?><?php panda($aRecipe['unlockId']); ?></td>
+            <td><?php panda(implode(',',$aRecipe['aGodChefNames'])); ?></td>
+        </tr>
+    <?php } ?>
+    </tbody>
+</table>
+<h1>我拥有的厨师(<?php panda(count($aIGetChefs)); ?>个)</h1>
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+            <td>#</td>
+            <td>名称</td>
+            <td>炒</td>
+            <td>煮</td>
+            <td>切</td>
+            <td>炸</td>
+            <td>烤</td>
+            <td>蒸</td>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach($aIGetChefs as $aChef){ ?>
+        <tr>
+            <td><?php panda($aChef['iChefId']); ?></td>
+            <td><?php panda($aChef['sName']); ?></td>
+            <td>炒:<?php panda($aChef['iStirfry']); ?></td>
+            <td>煮:<?php panda($aChef['iBoil']); ?></td>
+            <td>切:<?php panda($aChef['iCut']); ?></td>
+            <td>炸:<?php panda($aChef['iFry']); ?></td>
+            <td>烤:<?php panda($aChef['iRoast']); ?></td>
+            <td>蒸:<?php panda($aChef['iSteam']); ?></td>
+        </tr>
+    <?php } ?>
+    </tbody>
+</table>
+<h1>我得到的菜单(<?php panda(count($aIGetRecipes)); ?>个)</h1>
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+            <td>#</td>
+            <td>名称</td>
+            <td>星级</td>
+            <td>炒</td>
+            <td>煮</td>
+            <td>切</td>
+            <td>炸</td>
+            <td>烤</td>
+            <td>蒸</td>
+            <td>解锁</td>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach($aIGetRecipes as $aRecipe){ ?>
+        <tr>
+            <td><?php panda($aRecipe['recipeId']); ?></td>
+            <td><?php panda($aRecipe['name']); ?></td>
+            <td><?php panda($aRecipe['fire']); ?></td>
+            <td><?php panda($aRecipe['stirfry']); ?></td>
+            <td><?php panda($aRecipe['boil']); ?></td>
+            <td><?php panda($aRecipe['cut']); ?></td>
+            <td><?php panda($aRecipe['fry']); ?></td>
+            <td><?php panda($aRecipe['roast']); ?></td>
+            <td><?php panda($aRecipe['steam']); ?></td>
+            <td><?php panda($aRecipe['unlock']); ?><?php panda($aRecipe['unlockId']); ?></td>
+        </tr>
+        <?php } ?>
+    </tbody>
+</table>
+<?php
+$this->pandaTpl('/global/bottom', array(
+    'aJSFiles' => []
+));

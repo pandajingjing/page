@@ -1,0 +1,112 @@
+<?php
+$this->pandaTpl('/global/top', array(
+    'sPageTitle' => '游戏助手-爆炒江湖-数据源',
+    'aCssFiles' => [],
+    'sShowTap' => 'default'
+));
+?>
+<h1>菜单</h1>
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+            <td>#</td>
+            <td>名称</td>
+            <td>星级</td>
+            <td>炒</td>
+            <td>煮</td>
+            <td>切</td>
+            <td>炸</td>
+            <td>烤</td>
+            <td>蒸</td>
+            <td>价格</td>
+            <td>烹饪时间</td>
+            <td>装备上限</td>
+            <td>解锁</td>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach($aRecipes as $aRecipe){ ?>
+        <tr <?php if($aRecipe['iGet']){ ?> class="success" <?php } ?>>
+            <td><?php panda($aRecipe['recipeId']); ?></td>
+            <td><?php panda($aRecipe['name']); ?></td>
+            <td><?php panda($aRecipe['fire']); ?></td>
+            <td><?php panda($aRecipe['stirfry']); ?></td>
+            <td><?php panda($aRecipe['boil']); ?></td>
+            <td><?php panda($aRecipe['cut']); ?></td>
+            <td><?php panda($aRecipe['fry']); ?></td>
+            <td><?php panda($aRecipe['roast']); ?></td>
+            <td><?php panda($aRecipe['steam']); ?></td>
+            <td><?php panda($aRecipe['price']); ?></td>
+            <td><?php panda($aRecipe['time']); ?>秒/个</td>
+            <td><?php panda($aRecipe['total']); ?></td>
+            <td><?php panda($aRecipe['unlock']); ?><?php panda($aRecipe['unlockId']); ?></td>
+        </tr>
+    <?php } ?>
+    </tbody>
+</table>
+<h1>符文</h1>
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+            <td>#</td>
+            <td>名称</td>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach($aRunes as $iIndex=> $aRune){ ?>
+        <tr>
+            <td><?php panda($iIndex + 1); ?></td>
+            <td><?php panda($aRune['name']); ?></td>
+        </tr>
+    <?php } ?>
+    </tbody>
+</table>
+<h1>厨师</h1>
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+            <td>#</td>
+            <td>名称</td>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach($aChefs as $aChef){ ?>
+        <tr>
+            <td><?php panda($aChef['chefId']); ?></td>
+            <td><?php panda($aChef['name']); ?></td>
+        </tr>
+    <?php } ?>
+    </tbody>
+</table>
+<h1>贵宾</h1>
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+            <td>#</td>
+            <td>名称</td>
+            <td>喜好</td>
+            <td>礼物</td>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach($aGuests as $aGuest){ ?>
+        <tr>
+            <td><?php panda($aGuest['guestId']); ?></td>
+            <td><?php panda($aGuest['name']); ?></td>
+            <?php
+        $aRecipes = $aRunes = [];
+        foreach ($aGuest['gifts'] as $aGift) {
+            $aRecipes[] = $aGift['recipe'];
+            $aRunes[] = $aGift['rune'];
+        }
+        ?>
+            <td><?php panda(implode($aRecipes, ',')); ?></td>
+            <td><?php panda(implode($aRunes,',')); ?></td>
+        </tr>
+    <?php } ?>
+    </tbody>
+</table>
+<?php
+$this->pandaTpl('/global/bottom', array(
+    'aJSFiles' => []
+));

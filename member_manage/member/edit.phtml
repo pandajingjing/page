@@ -1,0 +1,45 @@
+<?php
+if ($iMemberId > 0) {
+    $sTitle = '编辑基本信息';
+} else {
+    $sTitle = '新增会员';
+}
+$this->pandaTpl('/global/logintop', array(
+    'sPageTitle' => '系统管理-会员管理-' . $sTitle,
+    'aCssFiles' => [
+        '/lib/css/bootstrap/datetimepicker.min.css'
+    ],
+    'sShowTap' => 'member'
+));
+?>
+<div class="page-header">
+    <h1>
+        <?php panda($sTitle); ?>
+		<small>
+            <a href="<?php panda($sListingUrl); ?>">会员列表</a>
+        </small>
+    </h1>
+</div>
+<form method="post" enctype="application/x-www-form-urlencoded" action="" class="form-horizontal" role="form">
+    <?php $this->pandaTpl('/global/input',['sId'=>'nickname','sLabel'=>'用户昵称','sPlaceHolder'=>'请输入用户昵称','sFormDataKey'=>'sNickName','bMust'=>true,'aErrorMsg'=>['Empty'=>'请填写用户昵称']]); ?>
+    <?php $this->pandaTpl('/global/input',['sId'=>'realname','sLabel'=>'真实姓名','sPlaceHolder'=>'请输入用户真实姓名','sFormDataKey'=>'sRealName','bMust'=>true,'aErrorMsg'=>['Empty'=>'请填写用户真实姓名']]); ?>
+    <?php $this->pandaTpl('/global/datetime',['sId'=>'regtime','sLabel'=>'注册时间','sPlaceHolder'=>'请选择用户注册时间','sFormat'=>'Y-m-d H:i','sFormDataKey'=>'iRegistrationTime','bMust'=>true,'aErrorMsg'=>['Empty'=>'请填写用户注册时间']]); ?>
+     <?php $this->pandaTpl('/global/select',['sId'=>'channel','sLabel'=>'注册渠道','sFormDataKey'=>'eChannel','bMust'=>true,'aDatas'=>$aSelectChannels,'aErrorMsg'=>['Empty'=>'请选择用户注册渠道','Invalid'=>'此渠道不存在']]); ?>
+    <?php $this->pandaTpl('/global/input',['sId'=>'mobile','sLabel'=>'用户手机','sPlaceHolder'=>'请输入用户手机','sFormDataKey'=>'sMobile','bMust'=>true,'aErrorMsg'=>['Empty'=>'请填写用户手机','Format_Error'=>'手机格式不正确']]); ?>
+    <?php $this->pandaTpl('/global/input',['sId'=>'wechat','sLabel'=>'用户微信号','sPlaceHolder'=>'请输入用户微信号','sFormDataKey'=>'sWeChat','aErrorMsg'=>['Empty'=>'请填写微信号']]); ?>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">保存</button>
+            <input type="hidden" name="next_act" value="save_member" />
+            <input type="hidden" name="member_id" value="<?php panda($iMemberId); ?>" />
+        </div>
+    </div>
+</form>
+<?php
+$this->pandaTpl('/global/bottom', array(
+    'aJSFiles' => [
+        '/lib/js/bootstrap/datetimepicker.min.js',
+        '/lib/js/bootstrap/locales/datetimepicker.zh-CN.js',
+        '/member_manage/js/edit.js'
+    ]
+));

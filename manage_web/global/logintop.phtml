@@ -31,8 +31,39 @@
                     <li <?php if('default'==$sShowTap){ ?> class="active" <?php } ?>>
                         <a href="<?php panda($aTopUrls['sDefault']); ?>">首页</a>
                     </li>
+                    <li class="dropdown<?php if('member'==$sShowTap){ ?> active<?php } ?>">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            会员管理
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="<?php panda($aTopUrls['aMember']['sListing']); ?>">会员列表</a>
+                            </li>
+                            <li>
+                                <a href="<?php panda($aTopUrls['aMember']['sAddNew']); ?>">新增会员</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown<?php if('stock'==$sShowTap){ ?> active<?php } ?>">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            多肉管理
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="<?php //panda($aTopUrls['aStock']['sAddNew']); ?>">添加新进货单</a>
+                            </li>
+                            <li>
+                                <a href="<?php //panda($aTopUrls['aStock']['sListing']); ?>">进货单列表</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="<?php panda($aTopUrls['sLogOut']); ?>">退出</a>
+                    </li>
                     <li class="active">
                         <a href="#" class="backtotop">返回顶部</a>
                     </li>

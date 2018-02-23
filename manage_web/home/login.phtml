@@ -1,0 +1,33 @@
+<?php
+$this->pandaTpl('/global/top', array(
+    'sPageTitle' => '系统管理-登录',
+    'aCssFiles' => [],
+    'sShowTap' => 'default'
+));
+?>
+<div class="col-sm-offset-2 col-sm-8">
+    <form class="form-horizontal" method="post" enctype="application/x-www-form-urlencoded" autocomplete="off">
+        <?php $this->pandaTpl('/global/input',['sId'=>'username','sLabel'=>'用户名','sPlaceHolder'=>'请输入用户名','sFormDataKey'=>'sUserName','bMust'=>true,'aErrorMsg'=>['Empty'=>'请填写用户名','Not_Found'=>'用户名不存在','Invalid'=>'此用户不能登陆管理系统']]); ?>
+        <?php $this->pandaTpl('/global/input',['sType'=>'password','sId'=>'userpwd','sLabel'=>'密码','sPlaceHolder'=>'请输入密码','sFormDataKey'=>'sUserPwd','bMust'=>true,'aErrorMsg'=>['Empty'=>'请填写密码','Invalid'=>'密码不正确']]); ?>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <div class="checkbox">
+                    <label for="remember">
+                        <input type="checkbox" name="remember" id="remember" <?php if($aFormData['bRemember']){ ?> checked="checked" <?php } ?>>
+                        记住我
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">登录</button>
+                <input type="hidden" name="next_act" value="login">
+            </div>
+        </div>
+    </form>
+</div>
+<?php
+$this->pandaTpl('/global/bottom', array(
+    'aJSFiles' => []
+));
