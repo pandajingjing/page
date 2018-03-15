@@ -18,7 +18,7 @@ $this->pandaTpl('/global/top', array(
             <tbody>
     <?php foreach($aIWantRunesChefs as $aChef){ ?>
         <tr>
-                    <td><?php panda($aChef['sName']); ?></td>
+                    <td><?php panda($aChef['sName']); ?>(<?php panda(count($aChef['aRecipes'])); ?>)</td>
                     <td><?php panda(implode(', ',$aChef['aRecipes'])); ?></td>
                 </tr>
     <?php } ?>
@@ -84,25 +84,62 @@ $this->pandaTpl('/global/top', array(
         <tr>
             <td>#</td>
             <td>名称</td>
-            <td>炒</td>
-            <td>煮</td>
-            <td>切</td>
-            <td>炸</td>
-            <td>烤</td>
-            <td>蒸</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
         </tr>
     </thead>
     <tbody>
-    <?php foreach($aIGetChefs as $aChef){ ?>
+    <?php
+
+    function sortAbilities($a, $b)
+    {
+        if ($a[1] > $b[1]) {
+            return - 1;
+        } elseif ($a[1] < $b[1]) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+    foreach ($aIGetChefs as $aChef) {
+        $aAbilities = [
+            [
+                '炒',
+                $aChef['iStirfry']
+            ],
+            [
+                '煮',
+                $aChef['iBoil']
+            ],
+            [
+                '切',
+                $aChef['iCut']
+            ],
+            [
+                '炸',
+                $aChef['iFry']
+            ],
+            [
+                '烤',
+                $aChef['iRoast']
+            ],
+            [
+                '蒸',
+                $aChef['iSteam']
+            ]
+        ];
+        usort($aAbilities, 'sortAbilities');
+        ?>
         <tr>
             <td><?php panda($aChef['iChefId']); ?></td>
             <td><?php panda($aChef['sName']); ?></td>
-            <td>炒:<?php panda($aChef['iStirfry']); ?></td>
-            <td>煮:<?php panda($aChef['iBoil']); ?></td>
-            <td>切:<?php panda($aChef['iCut']); ?></td>
-            <td>炸:<?php panda($aChef['iFry']); ?></td>
-            <td>烤:<?php panda($aChef['iRoast']); ?></td>
-            <td>蒸:<?php panda($aChef['iSteam']); ?></td>
+            <?php foreach($aAbilities as $aAbility){ ?>
+            <td><?php panda($aAbility[0]); ?>:<?php panda($aAbility[1]);?></td>
+            <?php } ?>
         </tr>
     <?php } ?>
     </tbody>
