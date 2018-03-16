@@ -52,7 +52,7 @@ $sInputWidthClass = $sInputWidthClass ?? 'col-sm-6';
     </div>
 </div>
 <?php }elseif($aFormStatus[$sFormStatusKey]===true){ ?>
-<div class="form-group has-success has-feedback">
+<div class="form-group has-success">
     <label for="<?php panda($sId); ?>" class="<?php panda($sLabelWidthClass) ?> control-label">
         <?php panda($sLabel); ?>
         <?php if($bMust){ ?>
@@ -65,11 +65,10 @@ $sInputWidthClass = $sInputWidthClass ?? 'col-sm-6';
             <option value="<?php panda($aData['sVal']); ?>" <?php if($aFormData[$sFormDataKey]==$aData['sVal']){ ?> selected="selected" <?php } ?>><?php panda($aData['sName']??pandaLang($aData['sLang'])); ?></option>
         <?php } ?>
         </select>
-        <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
     </div>
 </div>
 <?php }else{ ?>
-<div class="form-group has-error has-feedback">
+<div class="form-group has-error">
     <label for="<?php panda($sId); ?>" class="<?php panda($sLabelWidthClass) ?> control-label">
         <?php panda($sLabel); ?>
         <?php if($bMust){ ?>
@@ -82,7 +81,6 @@ $sInputWidthClass = $sInputWidthClass ?? 'col-sm-6';
             <option value="<?php panda($aData['sVal']); ?>" <?php if($aFormData[$sFormDataKey]==$aData['sVal']){ ?> selected="selected" <?php } ?>><?php panda($aData['sName']??pandaLang($aData['sLang'])); ?></option>
         <?php } ?>
         </select>
-        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
         <span class="help-block">
         <?php
     if (isset($aErrorMsg[$aFormStatus[$sFormStatusKey]['sType']])) {
