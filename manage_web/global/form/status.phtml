@@ -1,0 +1,34 @@
+<?php
+/**
+ * 控件参数
+ * 
+ * @param string sFormDataKey 必须，表单数据中控件的key
+ * @param string sFormStatusKey 选填，表单状态中控件的key，默认为表单数据中控件的key
+ * @param array aErrorMsg  选填，控件错误信息，默认为空数组
+ * @param string sInputWidthClass 选填，控件文本框的宽度样式名，默认为col-sm-6
+ * 
+ */
+// 检查必须值
+if (! isset($sFormDataKey)) {
+    throw new Exception('you miss sFormDataKey');
+}
+// 设置默认值
+$sFormStatusKey = $sFormStatusKey ?? $sFormDataKey;
+$aErrorMsg = $aErrorMsg ?? [];
+$sInputWidthClass = $sInputWidthClass ?? 'col-sm-offset-2 col-sm-10';
+?>
+<?php if(isset($aFormStatus[$sFormStatusKey])){ ?>
+<div class="form-group has-error has-feedback">
+    <div class="<?php panda($sInputWidthClass); ?>">
+        <span class="help-block">
+        <?php
+    if (isset($aErrorMsg[$aFormStatus[$sFormStatusKey]['sType']])) {
+        panda($aErrorMsg[$aFormStatus[$sFormStatusKey]['sType']]);
+    } else {
+        panda('未知错误(' . $aFormStatus[$sFormStatusKey]['sType'] . ')');
+    }
+    ?>
+        </span>
+    </div>
+</div>
+<?php } ?>
