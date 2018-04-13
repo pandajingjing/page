@@ -1,75 +1,75 @@
 <nav>
-	<ul class="pagination">
+    <ul class="pagination">
 		<?php if($aPager['aFirstPage']['bLink']){ ?>
 		<li>
-			<a href="<?php panda($aPager['aFirstPage']['sURL']); ?>">第1页</a>
-		</li>
+            <a href="<?php panda($aPager['aFirstPage']['sURL']); ?>">第1页</a>
+        </li>
 		<?php }else{ ?>
 		<li class="disabled">
-			<a href="#">第1页</a>
-		</li>
+            <a href="#">第1页</a>
+        </li>
 		<?php } ?>
 		
 		<?php if($aPager['aPreGPage']['bLink']){ ?>
 		<li>
-			<a href="<?php panda($aPager['aPreGPage']['sURL']); ?>">&laquo;</a>
-		</li>
+            <a href="<?php panda($aPager['aPreGPage']['sURL']); ?>">&laquo;</a>
+        </li>
 		<?php }else{ ?>
 		<li class="disabled">
-			<a href="#">&laquo;</a>
-		</li>
+            <a href="#">&laquo;</a>
+        </li>
 		<?php } ?>
 		
 		<?php if($aPager['aPrePage']['bLink']){ ?>
 		<li>
-			<a href="<?php panda($aPager['aPrePage']['sURL']); ?>">&lt;</a>
-		</li>
+            <a href="<?php panda($aPager['aPrePage']['sURL']); ?>">&lt;</a>
+        </li>
 		<?php }else{ ?>
 		<li class="disabled">
-			<a href="#">&lt;</a>
-		</li>
+            <a href="#">&lt;</a>
+        </li>
 		<?php } ?>
 		
 		<?php foreach($aPager['aNumURL'] as $aURL){ ?>
 			<?php if($aURL['bLink']){ ?>
 		<li>
-			<a href="<?php panda($aURL['sURL']); ?>"><?php panda($aURL['iIndex']); ?></a>
-		</li>
+            <a href="<?php panda($aURL['sURL']); ?>"><?php panda($aURL['iIndex']); ?></a>
+        </li>
 			<?php }else{ ?>
 		<li class="active">
-			<a href="#"><?php panda($aURL['iIndex']); ?></a>
-		</li>
+            <a href="#"><?php panda($aURL['iIndex']); ?></a>
+        </li>
 			<?php } ?>
 		<?php } ?>
 		
 		<?php if($aPager['aNextPage']['bLink']){ ?>
 		<li>
-			<a href="<?php panda($aPager['aNextPage']['sURL']); ?>">&gt;</a>
-		</li>
+            <a href="<?php panda($aPager['aNextPage']['sURL']); ?>">&gt;</a>
+        </li>
 		<?php }else{ ?>
 		<li class="disabled">
-			<a href="#">&gt;</a>
-		</li>
+            <a href="#">&gt;</a>
+        </li>
 		<?php } ?>
 		
 		<?php if($aPager['aNextGPage']['bLink']){ ?>
 		<li>
-			<a href="<?php panda($aPager['aNextGPage']['sURL']); ?>">&raquo;</a>
-		</li>
+            <a href="<?php panda($aPager['aNextGPage']['sURL']); ?>">&raquo;</a>
+        </li>
 		<?php }else{ ?>
 		<li class="disabled">
-			<a href="#">&raquo;</a>
-		</li>
+            <a href="#">&raquo;</a>
+        </li>
 		<?php } ?>
 		
 		<?php if($aPager['aLastPage']['bLink']){ ?>
 		<li>
-			<a href="<?php panda($aPager['aLastPage']['sURL']); ?>">第<?php panda($aPager['aLastPage']['iIndex']); ?>页</a>
-		</li>
+            <a href="<?php panda($aPager['aLastPage']['sURL']); ?>">第<?php panda($aPager['aLastPage']['iIndex']); ?>页</a>
+        </li>
 		<?php }else{ ?>
 		<li class="disabled">
-			<a href="#">第<?php panda($aPager['aLastPage']['iIndex']); ?>页</a>
-		</li>
+            <a href="#">第<?php panda($aPager['aLastPage']['iIndex']); ?>页</a>
+        </li>
 		<?php } ?>
 	</ul>
 </nav>

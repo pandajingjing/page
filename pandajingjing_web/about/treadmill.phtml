@@ -13,47 +13,46 @@ tLoadTpl('global_topnav', array(
 ?>
 <h3>跑步机</h3>
 <p>先上靓照</p>
-<img alt="跑步机" src="<?php pandaRes('/bodybuild/img/treadmill.jpeg'); ?>"
-	class="img-responsive center-block img-thumbnail">
+<img alt="跑步机" src="<?php pandaRes('/bodybuild/img/treadmill.jpeg'); ?>" class="img-responsive center-block img-thumbnail">
 <p>跑步机是某宝上买的,2k多吧,裸重大概在75kg上下,所以租房子的人就别买了,物流只送到楼下.当时是在很多热心人士的帮助下,花了快4个小时,把这一堆铁,从楼下搬到5楼,再组装起来的.大家早就一身汗,都虚脱了.为了不辜负他们,我郑重的宣布,我要开始减肥了</p>
 <p>跑步机的几个好处:</p>
 <ul>
-	<li>不会受天气干扰</li>
-	<li>可以边跑边看片子</li>
-	<li>缓冲效果很好</li>
-	<li>有坡度选择,可以降低对膝盖的损伤</li>
-	<li>速度和坡度都编程过的,自动调整,可以按照不同方式锻炼,部分模式具有HIIT的效果</li>
-	<li>最后说一下噪音问题,除了在一个房间里能够听到咚咚咚的脚步生,略显得响以外,关了门基本听不见.另外有送一个类似瑜伽垫的缓冲垫,所以不用担心影响楼下.当然如果你们楼的隔音效果奇差无比,那还是谨慎考虑.可以联系我实地考察一下.</li>
+    <li>不会受天气干扰</li>
+    <li>可以边跑边看片子</li>
+    <li>缓冲效果很好</li>
+    <li>有坡度选择,可以降低对膝盖的损伤</li>
+    <li>速度和坡度都编程过的,自动调整,可以按照不同方式锻炼,部分模式具有HIIT的效果</li>
+    <li>最后说一下噪音问题,除了在一个房间里能够听到咚咚咚的脚步生,略显得响以外,关了门基本听不见.另外有送一个类似瑜伽垫的缓冲垫,所以不用担心影响楼下.当然如果你们楼的隔音效果奇差无比,那还是谨慎考虑.可以联系我实地考察一下.</li>
 </ul>
 <p>下面是跑步机的几种模式介绍,各种数值都是跑了一遍得到的结果,一遍默认是30分钟,然后分成20份,每份都有自己的速度和坡度.</p>
 <div class="table-responsive">
-	<table class="table table-striped table-bordered table-hover">
-		<thead>
-			<tr>
-				<th class="text-center">模式</th>
-				<th class="text-center">名称</th>
-				<th class="text-center">距离</th>
-				<th class="text-center">消耗卡路里</th>
-				<th class="text-center">卡路里距离比</th>
-				<th class="text-center">速度分布</th>
-			</tr>
-		</thead>
-		<tbody>
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">模式</th>
+                <th class="text-center">名称</th>
+                <th class="text-center">距离</th>
+                <th class="text-center">消耗卡路里</th>
+                <th class="text-center">卡路里距离比</th>
+                <th class="text-center">速度分布</th>
+            </tr>
+        </thead>
+        <tbody>
              <?php foreach($aTreadmillDatas as $aData){ ?>
              <tr>
-				<td class="text-center" style="vertical-align: middle;"><?php tEcho($aData[0]); ?></td>
-				<td class="text-center" style="vertical-align: middle;"><?php tEcho($aData[1]); ?></td>
-				<td class="text-center" style="vertical-align: middle;"><?php tEcho($aData[2]); ?></td>
-				<td class="text-center" style="vertical-align: middle;"><?php tEcho($aData[3]); ?></td>
-				<td class="text-center" style="vertical-align: middle;"><?php tEcho(round($aData[3]/$aData[2],1)); ?></td>
-				<td>
-					<div id="speedchart_<?php tEcho($aData[0]); ?>" class="speedchart center-block"></div>
-					<input type="hidden" id="speeddata_<?php echo $aData[0]; ?>" value="<?php tEcho(json_encode($aData[4])); ?>" />
-				</td>
-			</tr>
+                <td class="text-center" style="vertical-align: middle;"><?php tEcho($aData[0]); ?></td>
+                <td class="text-center" style="vertical-align: middle;"><?php tEcho($aData[1]); ?></td>
+                <td class="text-center" style="vertical-align: middle;"><?php tEcho($aData[2]); ?></td>
+                <td class="text-center" style="vertical-align: middle;"><?php tEcho($aData[3]); ?></td>
+                <td class="text-center" style="vertical-align: middle;"><?php tEcho(round($aData[3]/$aData[2],1)); ?></td>
+                <td>
+                    <div id="speedchart_<?php tEcho($aData[0]); ?>" class="speedchart center-block"></div>
+                    <input type="hidden" id="speeddata_<?php echo $aData[0]; ?>" value="<?php tEcho(json_encode($aData[4])); ?>" />
+                </td>
+            </tr>
             <?php } ?>
          </tbody>
-	</table>
+    </table>
 </div>
 <?php
 tLoadTpl('global_bottom', array(

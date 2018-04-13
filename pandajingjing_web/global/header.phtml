@@ -25,66 +25,65 @@ var _hmt = _hmt || [];
 </script>
 </head>
 <body>
-	<nav class="navbar navbar-default  navbar-fixed-top navbar-inverse">
-		<div class="container" id="top">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">
-					<img src="<?php pandaRes('/bodybuild/img/logo.jpg'); ?>" alt="logo" width="30" class="img-circle" />
-				</a>
-			</div>
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li <?php if($sNavActiveKey=='home'){ ?> class="active" <?php } ?>>
-						<a href="<?php tEcho($aTopUrl['sHomeURL']); ?>"> 首页 </a>
-					</li>
-					<li <?php if($sNavActiveKey=='article'){ ?> class="active" <?php } ?>>
-						<a href="./article.php">健身知识</a>
-					</li>
-					<li <?php if($sNavActiveKey=='diet'){ ?> class="active" <?php } ?>>
-						<a href="<?php tEcho($aTopUrl['sDietURL']); ?>">健身饮食</a>
-					</li>
-					<li <?php if($sNavActiveKey=='motion'){ ?> class="active" <?php } ?>>
-						<a href="<?php tEcho($aTopUrl['sMotionURL']); ?>">健身动作</a>
-					</li>
-					<li <?php if($sNavActiveKey=='journal'){ ?> class="active" <?php } ?>>
-						<a href="./journal.php">健身日志</a>
-					</li>
-					<li
-						class="dropdown<?php if(isset(array_flip(array('about-treadmill','about-dumbbell','about-bmi'))[$sNavActiveKey])){ ?> active<?php } ?>">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-							关于
-							<span class="caret"></span>
-						</a>
-						<ul class="dropdown-menu" role="menu">
-							<li <?php if($sNavActiveKey=='about-treadmill'){ ?> class="active" <?php } ?>>
-								<a href="<?php tEcho($aTopUrl['sAboutTreadmillURL']); ?>">跑步机</a>
-							</li>
-							<li class="divider"></li>
-							<li <?php if($sNavActiveKey=='about-dumbbell'){ ?> class="active" <?php } ?>>
-								<a href="<?php tEcho($aTopUrl['sAboutDumbbellURL']); ?>">哑铃</a>
-							</li>
-							<li class="divider"></li>
-							<li <?php if($sNavActiveKey=='about-bmi'){ ?> class="active" <?php } ?>>
-								<a href="<?php tEcho($aTopUrl['sAboutBMIURL']); ?>">BMI</a>
-							</li>
-						</ul>
-					</li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li>
-						<a href="#top" id="backtotop">回到顶部</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<div class="container">
-		<div class="page-header">
-			<h1>
-				puffy的减肥日记
-				<small>一定能成功</small>
-			</h1>
-		</div>
-		<div class="row">
-			<div class="col-md-9">
+    <nav class="navbar navbar-default  navbar-fixed-top navbar-inverse">
+        <div class="container" id="top">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img src="<?php pandaRes('/bodybuild/img/logo.jpg'); ?>" alt="logo" width="30" class="img-circle" />
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li <?php if($sNavActiveKey=='home'){ ?> class="active" <?php } ?>>
+                        <a href="<?php tEcho($aTopUrl['sHomeURL']); ?>"> 首页 </a>
+                    </li>
+                    <li <?php if($sNavActiveKey=='article'){ ?> class="active" <?php } ?>>
+                        <a href="./article.php">健身知识</a>
+                    </li>
+                    <li <?php if($sNavActiveKey=='diet'){ ?> class="active" <?php } ?>>
+                        <a href="<?php tEcho($aTopUrl['sDietURL']); ?>">健身饮食</a>
+                    </li>
+                    <li <?php if($sNavActiveKey=='motion'){ ?> class="active" <?php } ?>>
+                        <a href="<?php tEcho($aTopUrl['sMotionURL']); ?>">健身动作</a>
+                    </li>
+                    <li <?php if($sNavActiveKey=='journal'){ ?> class="active" <?php } ?>>
+                        <a href="./journal.php">健身日志</a>
+                    </li>
+                    <li class="dropdown<?php if(isset(array_flip(array('about-treadmill','about-dumbbell','about-bmi'))[$sNavActiveKey])){ ?> active<?php } ?>">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            关于
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li <?php if($sNavActiveKey=='about-treadmill'){ ?> class="active" <?php } ?>>
+                                <a href="<?php tEcho($aTopUrl['sAboutTreadmillURL']); ?>">跑步机</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li <?php if($sNavActiveKey=='about-dumbbell'){ ?> class="active" <?php } ?>>
+                                <a href="<?php tEcho($aTopUrl['sAboutDumbbellURL']); ?>">哑铃</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li <?php if($sNavActiveKey=='about-bmi'){ ?> class="active" <?php } ?>>
+                                <a href="<?php tEcho($aTopUrl['sAboutBMIURL']); ?>">BMI</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#top" id="backtotop">回到顶部</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="page-header">
+            <h1>
+                puffy的减肥日记
+                <small>一定能成功</small>
+            </h1>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
