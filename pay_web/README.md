@@ -1,4 +1,4 @@
-# page-www_web
+# page-pay_web
 
 业务频道页面结构
 

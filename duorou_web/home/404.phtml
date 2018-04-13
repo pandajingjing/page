@@ -1,0 +1,18 @@
+<?php
+$this->pandaTpl('/global/top', array(
+    'sPageTitle' => '匠心多肉-走丢了',
+    'aCssFiles' => [],
+    'sShowTap' => 'www'
+));
+?>
+<div class="jumbotron">
+    <h1>走丢了</h1>
+    <p>别瞎跑了，赶紧回去吧。</p>
+    <p>
+        <a class="btn btn-primary btn-lg" href="<?php panda($sHomeUrl); ?>" role="button">回到首页</a>
+    </p>
+</div>
+<?php
+$this->pandaTpl('/global/bottom', array(
+    'aJSFiles' => []
+));

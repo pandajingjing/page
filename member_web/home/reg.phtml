@@ -1,0 +1,27 @@
+<?php
+$this->pandaTpl('/global/top', array(
+    'sPageTitle' => '用户中心-注册',
+    'aCssFiles' => [],
+    'sShowTap' => 'home'
+));
+?>
+<div class="col-sm-offset-2 col-sm-8">
+    <form class="form-horizontal" method="post" enctype="application/x-www-form-urlencoded" autocomplete="off">
+        <?php $this->pandaTpl('/global/form/input',['sId'=>'username','sLabel'=>'用户名','sPlaceHolder'=>'请输入用户名','sFormDataKey'=>'sUserName','bMust'=>true,'aErrorMsg'=>['Empty'=>'请填写用户名','Not_Found'=>'用户名不存在','Invalid'=>'此用户不能登陆管理系统']]); ?>
+        <?php $this->pandaTpl('/global/form/input',['sType'=>'password','sId'=>'userpwd','sLabel'=>'输入密码','sPlaceHolder'=>'请输入密码','sFormDataKey'=>'sUserPwd','bMust'=>true,'aErrorMsg'=>['Empty'=>'请填写密码']]); ?>
+        <?php $this->pandaTpl('/global/form/input',['sType'=>'password','sId'=>'userpwdcfm','sLabel'=>'确认密码','sPlaceHolder'=>'请确认密码','sFormDataKey'=>'sUserPwdCfm','bMust'=>true,'aErrorMsg'=>['Empty'=>'请确认密码']]); ?>
+        <div class="form-group">
+            <div class="col-sm-offset-2">
+                <div class="btn-toolbar col-sm-4">
+                    <button type="submit" class="btn btn-primary">注册</button>
+                    <a href="<?php panda($aPageUrl['sLogin']); ?>" class="btn btn-success" role="button">登录</a>
+                    <input type="hidden" name="next_act" value="reg">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<?php
+$this->pandaTpl('/global/bottom', array(
+    'aJSFiles' => []
+));

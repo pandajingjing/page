@@ -1,0 +1,113 @@
+<?php
+/**
+ * 控件参数
+ * 
+ * @param string sId 必须，控件id
+ * @param string sLabel 必须，控件标签
+ * @param string sFormDataKey 必须，表单数据中控件的key
+ * @param boolean bMust 选填，控件是否必填，默认为否
+ * @param string sType 选填，控件类型，默认为文本框
+ * @param string sName 选填，控件名称，默认为控件id
+ * @param string sPlaceHolder 选填，控件占位符，默认为空白字符串
+ * @param string sFormat 选填，时间戳格式化格式，默认为Y-m-d
+ * @param string sFormStatusKey 选填，表单状态中控件的key，默认为表单数据中控件的key
+ * @param array aErrorMsg  选填，控件错误信息，默认为空数组
+ * @param string sLabelWidthClass 选填，控件标签的宽度样式名，默认为col-sm-2
+ * @param string sInputWidthClass 选填，控件文本框的宽度样式名，默认为col-sm-6
+ * 
+ */
+// 检查必须值
+if (! isset($sId)) {
+    throw new Exception('you miss sId');
+}
+if (! isset($sLabel)) {
+    throw new Exception('you miss sLabel');
+}
+if (! isset($sFormDataKey)) {
+    throw new Exception('you miss sFormDataKey');
+}
+// 设置默认值
+$bMust = $bMust ?? false;
+$sType = $sType ?? 'text';
+$sName = $sName ?? $sId;
+$sPlaceHolder = $sPlaceHolder ?? '';
+$sFormat = $sFormat ?? 'Y-m-d';
+$sFormStatusKey = $sFormStatusKey ?? $sFormDataKey;
+$aErrorMsg = $aErrorMsg ?? [];
+$sLabelWidthClass = $sLableWidthClass ?? 'col-sm-2';
+$sInputWidthClass = $sInputWidthClass ?? 'col-sm-6';
+?>
+
+<?php if($aFormStatus[$sFormStatusKey]===false){ ?>
+<div class="form-group">
+    <label for="<?php panda($sId); ?>" class="<?php panda($sLabelWidthClass) ?> control-label">
+        <?php panda($sLabel); ?>
+        <?php if($bMust){ ?>
+        <span style="color: red;">*</span>
+        <?php } ?>
+    </label>
+    <div class="<?php panda($sInputWidthClass); ?>">
+        <div class="input-group date form_date">
+            <input type="text" class="form-control" size="16" id="<?php panda($sId); ?>" name="<?php panda($sName); ?>" value="<?php panda($aFormData[$sFormDataKey]>0?date($sFormat,$aFormData[$sFormDataKey]):''); ?>"
+                placeholder="<?php panda($sPlaceHolder); ?>" readonly="readonly" />
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-remove"></span>
+            </span>
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+    </div>
+</div>
+<?php }elseif($aFormStatus[$sFormStatusKey]===true){ ?>
+<div class="form-group has-success has-feedback">
+    <label for="<?php panda($sId); ?>" class="<?php panda($sLabelWidthClass) ?> control-label">
+        <?php panda($sLabel); ?>
+        <?php if($bMust){ ?>
+        <span style="color: red;">*</span>
+        <?php } ?>
+    </label>
+    <div class="<?php panda($sInputWidthClass); ?>">
+        <div class="input-group date form_date">
+            <input type="text" class="form-control" size="16" id="<?php panda($sId); ?>" name="<?php panda($sName); ?>" value="<?php panda($aFormData[$sFormDataKey]>0?date($sFormat,$aFormData[$sFormDataKey]):''); ?>"
+                placeholder="<?php panda($sPlaceHolder); ?>" readonly="readonly" />
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-remove"></span>
+            </span>
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+    </div>
+</div>
+<?php }else{ ?>
+<div class="form-group has-error has-feedback">
+    <label for="<?php panda($sId); ?>" class="<?php panda($sLabelWidthClass) ?> control-label">
+        <?php panda($sLabel); ?>
+        <?php if($bMust){ ?>
+        <span style="color: red;">*</span>
+        <?php } ?>
+    </label>
+    <div class="<?php panda($sInputWidthClass); ?>">
+        <div class="input-group date form_date">
+            <input type="text" class="form-control" size="16" id="<?php panda($sId); ?>" name="<?php panda($sName); ?>" value="<?php panda($aFormData[$sFormDataKey]>0?date('Y-m-d',$aFormData[$sFormDataKey]):''); ?>"
+                placeholder="<?php panda($sPlaceHolder); ?>" readonly="readonly" />
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-remove"></span>
+            </span>
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+        <span class="help-block">
+        <?php
+    if (isset($aErrorMsg[$aFormStatus[$sFormStatusKey]['sType']])) {
+        panda($aErrorMsg[$aFormStatus[$sFormStatusKey]['sType']]);
+    } else {
+        panda('未知错误(' . $aFormStatus[$sFormStatusKey]['sType'] . ')');
+    }
+    ?>
+        </span>
+    </div>
+</div>
+<?php } ?>
